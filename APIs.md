@@ -57,3 +57,16 @@ This endpoint must submit the product identifier for which we want to get inform
 A simple test involving POJOs has been designed to check that the API endpoints return values and can be read/printed from Java code.
 Opening the IntelliJ project, one can run the main method inside the OasisTest class, and it will call the 4 API methods, as well as printing
 their results with a regular toString call.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Quotes API
+QUOTES API allows to randomly display a famous phrase from a registered author. It has only a GET method and, as with the previous api, it is not a full REST API either; nor does it violate the principles of REST APIs because it uses the GET method to query the database.
+<br>The query method is:
+- GET Random quote
+- This API operates from **oasis.p.rapidapi.com**, the fixed side of the address that will be present in all endpoint calls.
+
+All endpoints in this API must have the following headers:
+- X-RapidAPI-Key: a fixed value which identifies a client authorized to call RapidAPI.
+- X-RapidAPI-Host: the host address of the API within the RapidAPI provider.
+
+It can also have an optional parameter called languague_code, which allows to extract the quote in several languages (English [en], Spanish [es], Portuguese [pt], Italian [it], German [de], French [fr], Czech [cs] and Slovak [sk]). If none is selected, the sentences will be in English by default.
