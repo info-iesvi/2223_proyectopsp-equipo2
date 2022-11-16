@@ -70,3 +70,12 @@ All endpoints in this API must have the following headers:
 - X-RapidAPI-Host: the host address of the API within the RapidAPI provider.
 
 It can also have an optional parameter called languague_code, which allows to extract the quote in several languages (English [en], Spanish [es], Portuguese [pt], Italian [it], German [de], French [fr], Czech [cs] and Slovak [sk]). If none is selected, the sentences will be in English by default.
+
+### GET Random quote
+This endpoint returns the sentence of one of the authors that we have in the database. If we want to select a language, the endpoint address would be: _quotes/random/?language_code={{language_code}}_
+
+![image](https://user-images.githubusercontent.com/58866375/202271614-475f7fea-5f6e-4829-93d1-e2e680559e2f.png)
+
+## API Testing
+A simple test involving POJOs has been designed to check that the API endpoints return values and can be read/printed from Java code.
+Opening the IDE project, one can run the main method inside the RandomTest class, and it will call the API method, as well as printing their results with a regular toString call.
