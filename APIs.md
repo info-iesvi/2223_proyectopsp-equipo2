@@ -53,3 +53,7 @@ The endpoint address would be: _products/{{productId}}?apiKey={{amazonToken}}_
 
 This endpoint must submit the product identifier for which we want to get information as part of the endpoint address.
 
+## API Testing
+A simple test involving POJOs has been designed to check that the API endpoints return values and can be read/printed from Java code.
+Opening the IntelliJ project, one can run the main method inside the OasisTest class, and it will call the 4 API methods, as well as printing
+their results with a regular toString call.
