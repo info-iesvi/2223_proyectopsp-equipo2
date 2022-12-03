@@ -17,4 +17,7 @@ public class UserAdmin extends User {
     @Column(name = "id_admin", nullable = false)
     private Integer idAdmin;
     private Double salary;
+
+    @JoinColumn(name = "user_id")
+    private Integer userId;
 }

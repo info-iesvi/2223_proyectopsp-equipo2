@@ -22,7 +22,7 @@ public class User {
     private String firstName;
     private String lastName;
     @ManyToOne
-    @JoinColumn(name = "address_id_address")
+    @JoinColumn(name = "address_id")
     private Address address;
     private String phoneNumber;
     private String email;

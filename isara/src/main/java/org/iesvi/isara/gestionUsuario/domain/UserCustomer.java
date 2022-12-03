@@ -16,4 +16,7 @@ public class UserCustomer extends User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_customer", nullable = false)
     private Integer idCustomer;
+
+    @JoinColumn(name = "user_id")
+    private Integer userId;
 }
