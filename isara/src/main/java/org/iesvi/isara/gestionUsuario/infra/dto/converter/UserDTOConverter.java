@@ -1,7 +1,8 @@
-package org.iesvi.isara.gestionUsuario.infra.dto;
+package org.iesvi.isara.gestionUsuario.infra.dto.converter;
 
 import lombok.RequiredArgsConstructor;
 import org.iesvi.isara.gestionUsuario.domain.User;
+import org.iesvi.isara.gestionUsuario.infra.dto.UserDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 

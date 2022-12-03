@@ -5,8 +5,9 @@ import org.iesvi.isara.gestionUsuario.domain.User;
 import org.iesvi.isara.gestionUsuario.infra.dto.CreateUserDTO;
 import org.iesvi.isara.gestionUsuario.infra.dto.UpdateUserDTO;
 import org.iesvi.isara.gestionUsuario.infra.dto.UserDTO;
-import org.iesvi.isara.gestionUsuario.infra.dto.UserDTOConverter;
+import org.iesvi.isara.gestionUsuario.infra.dto.converter.UserDTOConverter;
 import org.iesvi.isara.gestionUsuario.infra.persistence.UserRepository;
+import org.iesvi.isara.shared.domain.Address;
 import org.iesvi.isara.shared.infra.persistence.AddressRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -86,13 +87,16 @@ public class UserController {
     @PutMapping("/user/{id}")
     public ResponseEntity<?> editUser(@RequestBody UpdateUserDTO editUser, @PathVariable Long id) {
         return userRepository.findById(id).map(user -> {
+            Address address = addressRepository.findById(editUser.getAddress().getIdAddress()).orElse(null);
+
             user.setUserName(editUser.getUserName());
             user.setPassword(editUser.getPassword());
             user.setFirstName(editUser.getFirstName());
             user.setLastName(editUser.getLastName());
-            user.setAddress(editUser.getAddress());
+            user.setAddress(address);
             user.setPhoneNumber(editUser.getPhoneNumber());
             user.setEmail(editUser.getEmail());
+
             return ResponseEntity.ok(userRepository.save(user));
         }).orElseGet(() -> ResponseEntity.notFound().build());
     }
