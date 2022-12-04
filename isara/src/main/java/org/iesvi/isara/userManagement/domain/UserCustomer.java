@@ -1,4 +1,4 @@
-package org.iesvi.isara.gestionUsuario.domain;
+package org.iesvi.isara.userManagement.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,16 +7,17 @@ import lombok.NoArgsConstructor;
 
 /**
  * Child class that extends the user class.
+ *
+ * @author Isa González
  */
 @Entity
 @Data
 @AllArgsConstructor @NoArgsConstructor
-public class UserAdmin extends User {
+public class UserCustomer extends User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_admin", nullable = false)
-    private Integer idAdmin;
-    private Double salary;
+    @Column(name = "id_customer", nullable = false)
+    private Long idCustomer;
 
     @JoinColumn(name = "user_id")
     private Integer userId;

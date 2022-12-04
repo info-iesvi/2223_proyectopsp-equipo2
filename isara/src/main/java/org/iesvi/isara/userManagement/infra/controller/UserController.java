@@ -1,13 +1,13 @@
-package org.iesvi.isara.gestionUsuario.infra.controller;
+package org.iesvi.isara.userManagement.infra.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.iesvi.isara.gestionUsuario.domain.User;
-import org.iesvi.isara.gestionUsuario.infra.dto.CreateUserDTO;
-import org.iesvi.isara.gestionUsuario.infra.dto.UpdateUserDTO;
-import org.iesvi.isara.gestionUsuario.infra.dto.UserDTO;
-import org.iesvi.isara.gestionUsuario.infra.dto.converter.UserDTOConverter;
-import org.iesvi.isara.gestionUsuario.infra.persistence.UserRepository;
-import org.iesvi.isara.shared.domain.Address;
+import org.iesvi.isara.shared.domain.UserAddress;
+import org.iesvi.isara.userManagement.domain.User;
+import org.iesvi.isara.userManagement.infra.dto.CreateUserDTO;
+import org.iesvi.isara.userManagement.infra.dto.UpdateUserDTO;
+import org.iesvi.isara.userManagement.infra.dto.UserDTO;
+import org.iesvi.isara.userManagement.infra.dto.converter.UserDTOConverter;
+import org.iesvi.isara.userManagement.infra.persistence.UserRepository;
 import org.iesvi.isara.shared.infra.persistence.AddressRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +16,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * User controller where CRUD methods are declared.
+ *
+ * @author Isa González
+ */
 @RestController
 @RequiredArgsConstructor
 public class UserController {
@@ -24,9 +29,9 @@ public class UserController {
     private final UserDTOConverter userDTOConverter;
 
     /**
-     * Método para obtener una lista con todos los usuarios
+     * Method to obtain a list with all users.
      *
-     * @return 404 Not Found si no encuentra ningún usuario, 200 OK si encuentra usuarios y la lista de los mismos
+     * @return 404 Not Found if it does not find any user, 200 OK if it finds users and the list of them.
      */
     @GetMapping("/users/")
     public ResponseEntity<?> getAllUsers() {
@@ -44,10 +49,10 @@ public class UserController {
     }
 
     /**
-     * Método para obtener un usuario por su ID
+     * Method to get a user by his ID.
      *
-     * @param id Identificador del usuario
-     * @return 404 Not Found si no encuentra al usuario, 200 OK si encuentra al usuario y los datos del mismo
+     * @param id User identifier.
+     * @return 404 Not Found if it does not find the user, 200 OK if it finds the user and its data.
      */
     @GetMapping("/user/{id}")
     public ResponseEntity<?> getUserById(@PathVariable Long id) {
@@ -62,10 +67,10 @@ public class UserController {
     }
 
     /**
-     * Método para añadir un nuevo usuario
+     * Method to add a new user.
      *
-     * @param newUser Datos del nuevo usuario
-     * @return 201 Created si se ha insertado con éxito el nuevo usuario
+     * @param newUser Data of the new user.
+     * @return 201 Created if the new user has been inserted successfully.
      */
     @PostMapping("/user")
     public ResponseEntity<User> addNewUser(@RequestBody CreateUserDTO newUser) {
@@ -78,16 +83,16 @@ public class UserController {
     }
 
     /**
-     * Método para editar un usuario
+     * Method to edit a user.
      *
-     * @param editUser Datos nuevos del usuario
-     * @param id Identificador del usuario
-     * @return 200 OK si se edita correctamente, 404 Not Found si no es así
+     * @param editUser New user data.
+     * @param id User identifier.
+     * @return 200 OK if edited successfully, 404 Not Found if not.
      */
     @PutMapping("/user/{id}")
     public ResponseEntity<?> editUser(@RequestBody UpdateUserDTO editUser, @PathVariable Long id) {
         return userRepository.findById(id).map(user -> {
-            Address address = addressRepository.findById(editUser.getAddress().getIdAddress()).orElse(null);
+            UserAddress address = addressRepository.findById(editUser.getAddress().getIdAddress()).orElse(null);
 
             user.setUserName(editUser.getUserName());
             user.setPassword(editUser.getPassword());
@@ -102,10 +107,10 @@ public class UserController {
     }
 
     /**
-     * Método para borrar un usuario por su ID
+     * Method to delete a user by his ID
      *
-     * @param id Identificador del usuario
-     * @return 202 No Content si se ha borrado con éxito el usuario, 404 Not Found si no se ha encontrado
+     * @param id User identifier.
+     * @return 202 No Content if the user was successfully deleted, 404 Not Found if the user was not found.
      */
     @DeleteMapping("/user/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id) {

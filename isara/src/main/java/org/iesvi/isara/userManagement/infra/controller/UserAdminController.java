@@ -1,13 +1,13 @@
-package org.iesvi.isara.gestionUsuario.infra.controller;
+package org.iesvi.isara.userManagement.infra.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.iesvi.isara.gestionUsuario.domain.UserAdmin;
-import org.iesvi.isara.gestionUsuario.infra.dto.CreateUserAdminDTO;
-import org.iesvi.isara.gestionUsuario.infra.dto.UpdateUserAdminDTO;
-import org.iesvi.isara.gestionUsuario.infra.dto.UserAdminDTO;
-import org.iesvi.isara.gestionUsuario.infra.dto.converter.UserAdminDTOConverter;
-import org.iesvi.isara.gestionUsuario.infra.persistence.UserAdminRepository;
-import org.iesvi.isara.shared.domain.Address;
+import org.iesvi.isara.userManagement.domain.UserAdmin;
+import org.iesvi.isara.userManagement.infra.dto.CreateUserAdminDTO;
+import org.iesvi.isara.userManagement.infra.dto.UpdateUserAdminDTO;
+import org.iesvi.isara.userManagement.infra.dto.UserAdminDTO;
+import org.iesvi.isara.userManagement.infra.dto.converter.UserAdminDTOConverter;
+import org.iesvi.isara.userManagement.infra.persistence.UserAdminRepository;
+import org.iesvi.isara.shared.domain.UserAddress;
 import org.iesvi.isara.shared.infra.persistence.AddressRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +16,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * UserAdmin controller where CRUD methods are declared.
+ *
+ * @author Isa González
+ */
 @RestController
 @RequiredArgsConstructor
 public class UserAdminController {
@@ -67,7 +72,7 @@ public class UserAdminController {
     @PutMapping("/user/admin/{id}")
     public ResponseEntity<?> editUserAdmin(@RequestBody UpdateUserAdminDTO editUserAdmin, @PathVariable Long id) {
         return userAdminRepository.findById(id).map(userAdmin -> {
-            Address address = addressRepository.findById(editUserAdmin.getAddress().getIdAddress()).orElse(null);
+            UserAddress address = addressRepository.findById(editUserAdmin.getAddress().getIdAddress()).orElse(null);
 
             userAdmin.setUserName(editUserAdmin.getUserName());
             userAdmin.setPassword(editUserAdmin.getPassword());

@@ -1,11 +1,15 @@
-package org.iesvi.isara.gestionUsuario.infra.dto.converter;
+package org.iesvi.isara.userManagement.infra.dto.converter;
 
 import lombok.RequiredArgsConstructor;
-import org.iesvi.isara.gestionUsuario.domain.UserAdmin;
-import org.iesvi.isara.gestionUsuario.infra.dto.UserAdminDTO;
+import org.iesvi.isara.userManagement.domain.UserAdmin;
+import org.iesvi.isara.userManagement.infra.dto.UserAdminDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+/**
+ *
+ * @author Isa González
+ */
 @Component
 @RequiredArgsConstructor
 public class UserAdminDTOConverter {

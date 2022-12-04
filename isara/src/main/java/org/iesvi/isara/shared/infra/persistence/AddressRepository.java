@@ -1,7 +1,11 @@
 package org.iesvi.isara.shared.infra.persistence;
 
-import org.iesvi.isara.shared.domain.Address;
+import org.iesvi.isara.shared.domain.UserAddress;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface AddressRepository extends JpaRepository<Address, Long> {
+/**
+ *
+ * @author Isa González
+ */
+public interface AddressRepository extends JpaRepository<UserAddress, Long> {
 }

@@ -7,11 +7,13 @@ import lombok.NoArgsConstructor;
 
 /**
  * Auxiliary class to store user addresses.
+ *
+ * @author Isa González
  */
 @Entity
 @Data
 @AllArgsConstructor @NoArgsConstructor
-public class Address {
+public class UserAddress {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_address", nullable = false)

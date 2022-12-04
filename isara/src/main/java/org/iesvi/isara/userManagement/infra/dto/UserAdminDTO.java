@@ -1,11 +1,15 @@
-package org.iesvi.isara.gestionUsuario.infra.dto;
+package org.iesvi.isara.userManagement.infra.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ *
+ * @author Isa González
+ */
 @Getter
 @Setter
-public class CreateUserAdminDTO {
+public class UserAdminDTO {
     private String userName;
     private String passWord;
     private String firstName;
