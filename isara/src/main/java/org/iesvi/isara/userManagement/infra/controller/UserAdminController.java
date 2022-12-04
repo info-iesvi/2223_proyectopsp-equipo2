@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/isara")
 public class UserAdminController {
     private final UserAdminRepository userAdminRepository;
     private final UserAdminDTOConverter userAdminDTOConverter;

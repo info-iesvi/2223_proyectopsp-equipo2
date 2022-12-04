@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/isara")
 public class UserController {
     private final UserRepository userRepository;
     private final AddressRepository addressRepository;
