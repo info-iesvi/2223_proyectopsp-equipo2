@@ -12,6 +12,7 @@ import org.iesvi.isara.shared.domain.UserAddress;
  * @author Isa González
  */
 @Entity
+@Table(name = "user")
 @Data
 @AllArgsConstructor @NoArgsConstructor
 public class User {

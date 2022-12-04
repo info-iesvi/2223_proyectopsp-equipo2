@@ -34,7 +34,7 @@ public class UserController {
      *
      * @return 404 Not Found if it does not find any user, 200 OK if it finds users and the list of them.
      */
-    @GetMapping("/users/")
+    @GetMapping("/users")
     public ResponseEntity<?> getAllUsers() {
         List<User> usersList = userRepository.findAll();
 

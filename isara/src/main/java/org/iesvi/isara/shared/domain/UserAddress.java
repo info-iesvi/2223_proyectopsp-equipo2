@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
  * @author Isa González
  */
 @Entity
+@Table(name = "address")
 @Data
 @AllArgsConstructor @NoArgsConstructor
 public class UserAddress {

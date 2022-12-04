@@ -29,7 +29,7 @@ public class UserAdminController {
     private final UserAdminDTOConverter userAdminDTOConverter;
     private final AddressRepository addressRepository;
 
-    @GetMapping("/users/admin/")
+    @GetMapping("/users/admin")
     public ResponseEntity<?> getAllUsersAdmin() {
         List<UserAdmin> userAdminList = userAdminRepository.findAll();
 
