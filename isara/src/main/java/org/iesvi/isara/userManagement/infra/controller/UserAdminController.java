@@ -9,6 +9,7 @@ import org.iesvi.isara.userManagement.infra.dto.converter.UserAdminDTOConverter;
 import org.iesvi.isara.userManagement.infra.persistence.UserAdminRepository;
 import org.iesvi.isara.shared.domain.UserAddress;
 import org.iesvi.isara.shared.infra.persistence.AddressRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,10 +26,20 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @RequestMapping("/isara")
 public class UserAdminController {
+    @Autowired
     private final UserAdminRepository userAdminRepository;
+
+    @Autowired
     private final UserAdminDTOConverter userAdminDTOConverter;
+
+    @Autowired
     private final AddressRepository addressRepository;
 
+    /**
+     * Method to obtain a list with all users.
+     *
+     * @return 404 Not Found if it does not find any user, 200 OK if it finds users and the list of them.
+     */
     @GetMapping("/users/admin")
     public ResponseEntity<?> getAllUsersAdmin() {
         List<UserAdmin> userAdminList = userAdminRepository.findAll();
@@ -44,6 +55,12 @@ public class UserAdminController {
         }
     }
 
+    /**
+     * Method to get a user by his ID.
+     *
+     * @param id User identifier.
+     * @return 404 Not Found if it does not find the user, 200 OK if it finds the user and its data.
+     */
     @GetMapping("/user/admin/{id}")
     public ResponseEntity<?> getUserAdminById(@PathVariable Long id) {
         UserAdmin userAdmin = userAdminRepository.findById(id).orElse(null);
@@ -56,6 +73,12 @@ public class UserAdminController {
         }
     }
 
+    /**
+     * Method to add a new admin user.
+     *
+     * @param newUserAdmin Data of the new user.
+     * @return 201 Created if the new user has been inserted successfully.
+     */
     @PostMapping("/user/admin")
     public ResponseEntity<UserAdmin> addNewUserAdmin(@RequestBody CreateUserAdminDTO newUserAdmin) {
         UserAdmin userAdmin = new UserAdmin();
@@ -70,6 +93,13 @@ public class UserAdminController {
         return ResponseEntity.status(HttpStatus.CREATED).body(userAdminRepository.save(userAdmin));
     }
 
+    /**
+     * Method to edit an admin user.
+     *
+     * @param editUserAdmin New user data.
+     * @param id User identifier.
+     * @return 200 OK if edited successfully, 404 Not Found if not.
+     */
     @PutMapping("/user/admin/{id}")
     public ResponseEntity<?> editUserAdmin(@RequestBody UpdateUserAdminDTO editUserAdmin, @PathVariable Long id) {
         return userAdminRepository.findById(id).map(userAdmin -> {
@@ -88,6 +118,12 @@ public class UserAdminController {
         }).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    /**
+     * Method to delete a user by his ID
+     *
+     * @param id User identifier.
+     * @return 202 No Content if the user was successfully deleted, 404 Not Found if the user was not found.
+     */
     @DeleteMapping("/user/admin/{id}")
     public ResponseEntity<?> deleteUserAdmin(@PathVariable Long id) {
         if (userAdminRepository.existsById(id)) {

@@ -11,15 +11,7 @@ import lombok.NoArgsConstructor;
  * @author Isa González
  */
 @Entity
-@Table(name = "userCustomer")
 @Data
-@AllArgsConstructor @NoArgsConstructor
+@NoArgsConstructor
 public class UserCustomer extends User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_customer", nullable = false)
-    private Long idCustomer;
-
-    @JoinColumn(name = "user_id")
-    private Integer userId;
 }
