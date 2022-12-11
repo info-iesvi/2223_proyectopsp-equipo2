@@ -2,7 +2,7 @@ package org.iesvi.isara.userManagement.infra.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.iesvi.isara.shared.domain.UserAddress;
+import org.iesvi.isara.shared.infra.dto.AddressDTO;
 
 /**
  *
@@ -15,7 +15,7 @@ public class UpdateUserDTO {
     private String password;
     private String firstName;
     private String lastName;
-    private UserAddress address;
+    private AddressDTO address;
     private String phoneNumber;
     private String email;
 }

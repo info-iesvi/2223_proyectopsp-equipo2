@@ -93,7 +93,19 @@ public class UserController {
     @PutMapping("/user/{id}")
     public ResponseEntity<?> editUser(@RequestBody UpdateUserDTO editUser, @PathVariable Long id) {
         return userRepository.findById(id).map(user -> {
-            UserAddress address = addressRepository.findById(editUser.getAddress().getIdAddress()).orElse(null);
+            UserAddress address;
+            if (editUser.getAddress().getKindOfStreet() != null) { //if we sent all address data into request, it's a new address
+                address = new UserAddress(
+                        editUser.getAddress().getIdAddress(),
+                        editUser.getAddress().getKindOfStreet(),
+                        editUser.getAddress().getStreetName(),
+                        editUser.getAddress().getPostalCode(),
+                        editUser.getAddress().getCity()
+                );
+            }
+            else {
+                address = addressRepository.findById(editUser.getAddress().getIdAddress()).orElse(null);
+            }
 
             user.setUserName(editUser.getUserName());
             user.setPassword(editUser.getPassword());
@@ -102,6 +114,10 @@ public class UserController {
             user.setAddress(address);
             user.setPhoneNumber(editUser.getPhoneNumber());
             user.setEmail(editUser.getEmail());
+
+            if (editUser.getAddress().getKindOfStreet() != null) { //if it is a new address, save it before the user
+                addressRepository.save(address);
+            }
 
             return ResponseEntity.ok(userRepository.save(user));
         }).orElseGet(() -> ResponseEntity.notFound().build());

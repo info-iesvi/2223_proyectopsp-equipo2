@@ -11,6 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AddressDTO {
+    private Long idAddress;
     private String kindOfStreet;
     private String streetName;
     private Integer postalCode;
