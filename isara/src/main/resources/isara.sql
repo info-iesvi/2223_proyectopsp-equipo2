@@ -1,4 +1,4 @@
-INSERT INTO Address (idAddress, kindOfStreet, streetName, postalCode, city) VALUES (
+INSERT INTO UserAddress (idAddress, kindOfStreet, streetName, postalCode, city) VALUES (
     NEXTVAL('hibernate_sequence'),
     'Calle', 'Nuestra Señora de Lourdes, 38', '41510', 'Mairena del Alcor');
 

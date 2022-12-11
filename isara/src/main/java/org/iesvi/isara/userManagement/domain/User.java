@@ -13,7 +13,8 @@ import org.iesvi.isara.shared.domain.UserAddress;
  */
 @Entity
 @Data
-@AllArgsConstructor @NoArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User {
     @Id

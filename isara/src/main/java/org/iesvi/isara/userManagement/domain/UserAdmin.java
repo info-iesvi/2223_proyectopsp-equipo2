@@ -12,7 +12,8 @@ import lombok.NoArgsConstructor;
  */
 @Entity
 @Data
-@AllArgsConstructor @NoArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserAdmin extends User {
     private Double salary;
 }
