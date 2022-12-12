@@ -85,6 +85,16 @@ The Postman tool has been used to test the CRUD methods created for both User an
 ![image](https://user-images.githubusercontent.com/98974760/206924700-3f6c5116-6e90-410c-8509-deef51a4fed6.png)
 
 
+### ResponseEntity
+ResponseEntity represents the complete HTTP response: status code, headers, and body. We have used the following responses:
+- **200 OK**: Indicates that the request has been successful, either by listing the users, showing the data of a specific one or editing it.
+- **201 Created**: Indicates that the request has been successful, and has performed the creation of the new object.
+- **204 No Content**: Indicates that the delete request was successful, but the client does not receive a response.
+- **404 Not Found**: Indicates that no result has been found, because the data has been entered incorrectly or because the database is empty.
+
+This has been used in controllers (see code).
+
+
 ### DTO classes
 Several DTO classes have been made for each entity. These are:
 - **UserDTO** and **UserAdminDTO**
