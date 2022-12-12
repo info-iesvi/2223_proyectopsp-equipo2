@@ -122,7 +122,7 @@ public class UserAdminController {
      * Method to delete a user by his ID
      *
      * @param id User identifier.
-     * @return 202 No Content if the user was successfully deleted, 404 Not Found if the user was not found.
+     * @return 204 No Content if the user was successfully deleted, 404 Not Found if the user was not found.
      */
     @DeleteMapping("/user/admin/{id}")
     public ResponseEntity<?> deleteUserAdmin(@PathVariable Long id) {

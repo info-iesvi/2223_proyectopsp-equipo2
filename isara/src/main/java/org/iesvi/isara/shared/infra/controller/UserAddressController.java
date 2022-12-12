@@ -97,7 +97,7 @@ public class UserAddressController {
      * Method to delete a address by ID
      *
      * @param id Address identifier.
-     * @return 202 No Content if the address was successfully deleted, 404 Not Found if the address was not found.
+     * @return 204 No Content if the address was successfully deleted, 404 Not Found if the address was not found.
      */
     @DeleteMapping("/address/{id}")
     public ResponseEntity<?> deleteAddress(@PathVariable Long id) {
