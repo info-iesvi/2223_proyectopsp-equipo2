@@ -8,7 +8,7 @@ We are going to code following the Clean Architecture model (controller, service
 We have implemented a controller that manages the functionalities on the User entity of the application, another for the UserAdmin entity and another for UserCustomer.
 
 
-### Annotations used.
+### Annotations used in the controller.
 The annotations that we have used in these controllers are the following:
 - **@RestController**
 	Types carrying this annotation are treated as controllers where @RequestMapping methods assume the default semantics of @ResponseBody.
