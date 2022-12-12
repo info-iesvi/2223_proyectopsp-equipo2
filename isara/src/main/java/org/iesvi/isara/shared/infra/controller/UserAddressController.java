@@ -5,7 +5,6 @@ import org.iesvi.isara.shared.domain.UserAddress;
 import org.iesvi.isara.shared.infra.dto.AddressDTO;
 import org.iesvi.isara.shared.infra.dto.AddressDTOConverter;
 import org.iesvi.isara.shared.infra.persistence.AddressRepository;
-import org.iesvi.isara.userManagement.infra.dto.UserDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
