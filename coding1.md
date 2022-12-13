@@ -46,6 +46,14 @@ The annotations that we have used in these controllers are the following:
 ![image](https://user-images.githubusercontent.com/98974760/207104259-9893bdf1-a6ab-45bd-8f57-ac3017ce1f12.png)
 	
 
+### Other annotations.
+- **@SpringBootApplication**: This is an annotation that executes other 3 autoconfiguration with their default values: _@EnableAutoConfiguration, @ComponentScan_ and _@Configuration_.
+- **@Data**: It's a Lombok's annotation that creates _toString_, _equalsAndHashCode_, _getters_ and _setters_ and the _RequiredArgsConstructor_ too.
+- **@Getter and @Setter**: A default getter returns the field, and if, for example, it is called _getEmail_ if the field is called email; and a default setter is called _setEmail_ if the field is called email it returns void, and takes a parameter of the same type as the field.
+- **@AllArgsConstructor**: It generates the constructor with all the arguments.
+- **@NoArgsConstructor**: It generates the constructor without arguments.
+- **@Inheritance(strategy = InheritanceType.JOINED)**: It's an annotation used to mark an annotation to be inherited to subclasses of the annotated class.
+
 ### Object declaration to achieve layer decoupling through dependency injection.
 
 
