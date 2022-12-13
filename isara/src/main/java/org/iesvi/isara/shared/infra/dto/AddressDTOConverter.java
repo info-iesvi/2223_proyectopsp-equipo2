@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 /**
  *
- * @author Isa González
+ * @author Isa González & Sara Palma
  */
 @Component
 @RequiredArgsConstructor

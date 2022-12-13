@@ -9,7 +9,7 @@ import org.iesvi.isara.shared.domain.UserAddress;
 /**
  * User parent class with common attributes for all users who will use the application.
  *
- * @author Isa González
+ * @author Isa González & Sara Palma
  */
 @Entity
 @Data

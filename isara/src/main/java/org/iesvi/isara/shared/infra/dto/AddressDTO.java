@@ -5,7 +5,7 @@ import lombok.Setter;
 
 /**
  *
- * @author Isa González
+ * @author Isa González & Sara Palma
  */
 
 @Getter

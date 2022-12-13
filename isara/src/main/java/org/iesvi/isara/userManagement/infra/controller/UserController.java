@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 /**
  * User controller where CRUD methods are declared.
  *
- * @author Isa González
+ * @author Isa González & Sara Palma
  */
 @RestController
 @RequiredArgsConstructor

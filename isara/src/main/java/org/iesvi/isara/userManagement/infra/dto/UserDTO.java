@@ -6,7 +6,7 @@ import org.iesvi.isara.shared.domain.UserAddress;
 
 /**
  *
- * @author Isa González
+ * @author Isa González & Sara Palma
  */
 @Getter
 @Setter

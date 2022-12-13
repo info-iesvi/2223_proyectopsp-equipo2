@@ -6,7 +6,7 @@ import org.iesvi.isara.shared.infra.dto.AddressDTO;
 
 /**
  *
- * @author Isa González
+ * @author Isa González & Sara Palma
  */
 @Getter
 @Setter

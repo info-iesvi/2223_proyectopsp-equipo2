@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 /**
  * Child class that extends the user class.
  *
- * @author Isa González
+ * @author Isa González & Sara Palma
  */
 @Entity
 @Data
