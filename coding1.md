@@ -105,7 +105,29 @@ Several DTO classes have been made for each entity. These are:
 
 
 ## REPOSITORY LAYER
-The model annotations that allow persistence in JPA are those used in the User, UserAdmin, and UserCustomer classes. That is, @Entity, @Id, @GeneratedValue, @Column, @ManyToOne and @JoinColumn. All of them are explained in the previous section where all the annotations used in the application at the moment are.
+### JPA for data persistence
+The model annotations that allow persistence in JPA are those used in the User, UserAdmin, and UserCustomer classes. That is, @Entity, @Id, @GeneratedValue, @Column, @ManyToOne and @JoinColumn.
+- **@Entity**: Defines the entities that are going to be persisted in the database, corresponding to a table of the same, and their attributes with the columns.
+
+![image](https://user-images.githubusercontent.com/98974760/207414736-06aa7f4e-3aaa-47a5-8e7a-a29358969d97.png)
+
+- **@Id**: All classes with the @Entity annotation have to carry the @Id in a mandatory way, this being the attribute taken as the identifier of the entity.
+
+![image](https://user-images.githubusercontent.com/98974760/207414824-eb468292-e772-48f5-b14d-f32e541c9eae.png)
+
+- **@GeneratedValue**: Defines the primary key. You can put the strategy attribute to tell it to auto-generate, for example.
+
+![image](https://user-images.githubusercontent.com/98974760/207415378-6058af58-d57c-41d1-a116-1748f62413ef.png)
+
+- **@Column**: With this annotation you can define such important aspects of the database columns as name, length, restrictions, etc. In case of not defining this annotation in the attributes, JPA will determine the name of the column automatically through the name of the attribute. In this case, it has only been defined to be non-nullable.
+
+![image](https://user-images.githubusercontent.com/98974760/207414824-eb468292-e772-48f5-b14d-f32e541c9eae.png)
+
+- **ManyToOne**: Relates two entities to each other, with a many-to-one relationship.
+- **@JoinColumn**: It is used to indicate a foreign key, that is, that through the attribute you are joining two entities.
+
+![image](https://user-images.githubusercontent.com/98974760/207416419-73e7c523-0493-437f-8980-eab3c7e7ce42.png)
+
 
 The Maven dependency used that allows JPA to be available is the following:
 
