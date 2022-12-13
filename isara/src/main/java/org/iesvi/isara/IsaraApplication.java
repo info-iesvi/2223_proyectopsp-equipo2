@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * Main application, based on Spring Boot, where the service starts.
  *
- * @author Isa González
+ * @author Isa González & Sara Palma
  */
 @SpringBootApplication
 public class IsaraApplication {
