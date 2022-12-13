@@ -139,10 +139,14 @@ The Maven dependency used that allows JPA to be available is the following:
         </dependency>
 
 ### Database managers
-The configuration of the connection with the different databases is done in the "application.properties". There you specify the server port (if it is different from the 8080 that Tomcat uses by default), the username and password, and a number of other settings, depending on the chosen database.
+The configuration of the connection with the different databases is done in the _application.properties_. There you specify the server port (if it is different from the 8080 that Tomcat uses by default), the username and password, and a number of other settings, depending on the chosen database.
 
 #### H2
+**H2** is a relational database and works like an in-memory database, that is, it doesn't save changes from session to session. To start it, it is necessary to have configured the use of the h2-console in the _application.properties_ and, after starting our application, write in a browser _http://localhost:8083/h2-console_. Then the screen shown in the following image will appear, in which you will have to fill in the fields with the username, password and the url of the database defined in the same _application.properties_.
+
 ![image](https://user-images.githubusercontent.com/98974760/207419346-c6a5b90d-dbd8-4151-8953-8a8edcd2876f.png)
+
+Several tests have been carried out to verify that the application works, so three new users have been added, then the first one has been modified, and finally the third one has been eliminated.
 
 ![image](https://user-images.githubusercontent.com/98974760/207419651-85b62142-c6ba-4ae0-a5d0-ab9378aa1b7a.png)
 
