@@ -137,3 +137,10 @@ The Maven dependency used that allows JPA to be available is the following:
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
+
+### Database managers
+#### H2
+
+#### MySQL
+
+#### PostgresSQL
