@@ -142,6 +142,13 @@ The Maven dependency used that allows JPA to be available is the following:
 The configuration of the connection with the different databases is done in the "application.properties". There you specify the server port (if it is different from the 8080 that Tomcat uses by default), the username and password, and a number of other settings, depending on the chosen database.
 
 #### H2
+![image](https://user-images.githubusercontent.com/98974760/207419346-c6a5b90d-dbd8-4151-8953-8a8edcd2876f.png)
+
+![image](https://user-images.githubusercontent.com/98974760/207419651-85b62142-c6ba-4ae0-a5d0-ab9378aa1b7a.png)
+
+![image](https://user-images.githubusercontent.com/98974760/207420737-8a57d9e8-d4fb-4f29-8961-d5bab08398d2.png)
+
+![image](https://user-images.githubusercontent.com/98974760/207420921-c1fa6208-d559-4b72-bf49-084e44f4251e.png)
 
 #### MySQL
 
