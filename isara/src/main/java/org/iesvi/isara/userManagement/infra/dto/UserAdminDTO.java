@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * The UserAdminDTO has the information about the user admin.
  *
  * @author Isa González & Sara Palma
  */

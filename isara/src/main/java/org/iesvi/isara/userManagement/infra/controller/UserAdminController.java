@@ -49,6 +49,7 @@ public class UserAdminController {
         if (userAdminList.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
+        //If the userAdminList is not Empty, it will return the message 200 "Ok"
         else {
             List<UserAdminDTO> userAdminDTOList = userAdminList.stream()
                     .map(userAdminDTOConverter::convertToDto)
@@ -85,8 +86,10 @@ public class UserAdminController {
      */
     @PostMapping("/user/admin")
     public ResponseEntity<UserAdmin> addNewUserAdmin(@RequestBody CreateUserAdminDTO newUserAdmin) {
+        // We create a UserAdmin called userAdmin
         UserAdmin userAdmin = new UserAdmin();
 
+        // We put the new information
         userAdmin.setUserName(newUserAdmin.getUserName());
         userAdmin.setPassword(newUserAdmin.getPassWord());
         userAdmin.setFirstName(newUserAdmin.getFirstName());
@@ -107,9 +110,11 @@ public class UserAdminController {
      */
     @PutMapping("/user/admin/{id}")
     public ResponseEntity<?> editUserAdmin(@RequestBody UpdateUserAdminDTO editUserAdmin, @PathVariable Long id) {
+        // This looks for the user by id to edit the attributes
         return userAdminRepository.findById(id).map(userAdmin -> {
             UserAddress address = addressRepository.findById(editUserAdmin.getAddress().getIdAddress()).orElse(null);
 
+            // We put the new information
             userAdmin.setUserName(editUserAdmin.getUserName());
             userAdmin.setPassword(editUserAdmin.getPassword());
             userAdmin.setFirstName(editUserAdmin.getFirstName());
@@ -119,6 +124,7 @@ public class UserAdminController {
             userAdmin.setEmail(editUserAdmin.getEmail());
             userAdmin.setSalary(editUserAdmin.getSalary());
 
+            // If the user edits correctly, it will return the 200 Http response code
             return ResponseEntity.ok(userAdminRepository.save(userAdmin));
 
             // If the user edits incorrectly, it will return the 404 Http response code
@@ -133,10 +139,12 @@ public class UserAdminController {
      */
     @DeleteMapping("/user/admin/{id}")
     public ResponseEntity<?> deleteUserAdmin(@PathVariable Long id) {
+        // If the id exists, we will delete the user and get the 202 http response code
         if (userAdminRepository.existsById(id)) {
             userAdminRepository.deleteById(id);
             return ResponseEntity.noContent().build();
         }
+        // If it doesn't exist, we will get the 404 http response code (Not found)
         else {
             return ResponseEntity.notFound().build();
         }

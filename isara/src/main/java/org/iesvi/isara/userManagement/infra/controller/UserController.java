@@ -64,6 +64,7 @@ public class UserController {
         // The method findById() looks for a user into the repository by the user identification.
         User user = userRepository.findById(id).orElse(null);
 
+        // if the User called user is null, we will receive a 404 http response code; if not, we will get the 200 http code
         if (user == null) {
             return ResponseEntity.notFound().build();
         }
@@ -114,6 +115,7 @@ public class UserController {
                         editUser.getAddress().getCity()
                 );
             }
+            // If we don't send all address data into request, we will look for it
             else {
                 address = addressRepository.findById(editUser.getAddress().getIdAddress()).orElse(null);
             }
@@ -144,10 +146,12 @@ public class UserController {
      */
     @DeleteMapping("/user/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id) {
+        // If the id exists, we will delete the user and get the 202 http response code
         if (userRepository.existsById(id)) {
             userRepository.deleteById(id);
             return ResponseEntity.noContent().build();
         }
+        // If it doesn't exist, we will get the 404 http response code (Not found)
         else {
             return ResponseEntity.notFound().build();
         }

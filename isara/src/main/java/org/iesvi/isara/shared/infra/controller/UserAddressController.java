@@ -29,11 +29,14 @@ public class UserAddressController {
      */
     @GetMapping("/addresses")
     public ResponseEntity<?> getAllAddress() {
+        // The method findAll() looks for all the UserAddress into the repository.
         List<UserAddress> addressList = addressRepository.findAll();
 
+        //If the UserAddress is Empty, it will return the message 404 "Not Found"
         if (addressList.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
+        //If it is not Empty, it will return the message 200 "Ok"
         else {
             List<AddressDTO> addressDTOList = addressList.stream()
                     .map(addressDTOConverter::convertToDto)
@@ -50,8 +53,9 @@ public class UserAddressController {
      */
     @GetMapping("/address")
     public ResponseEntity<?> getAddressById(@PathVariable Long id) {
+        // The method findById() looks for a user address into the repository by the UserAddress identification.
         UserAddress address = addressRepository.findById(id).orElse(null);
-
+        // If the UserAddress called address is null, we will receive a 404 http response code; if not, we will get the 200 http code
         if (address == null) {
             return ResponseEntity.notFound().build();
         }
@@ -68,6 +72,7 @@ public class UserAddressController {
      */
     @PostMapping("/address")
     public ResponseEntity<UserAddress> addNewAddress(@RequestBody AddressDTO newAddress) {
+        // We create a UserAddress called address
         UserAddress address = new UserAddress();
         address.setKindOfStreet(newAddress.getKindOfStreet());
         address.setStreetName(newAddress.getStreetName());

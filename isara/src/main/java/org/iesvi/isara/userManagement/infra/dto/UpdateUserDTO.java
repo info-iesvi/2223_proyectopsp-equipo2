@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.iesvi.isara.shared.infra.dto.AddressDTO;
 
 /**
+ * This DTO is used by the controller to modify the user's attributes.
  *
  * @author Isa González & Sara Palma
  */

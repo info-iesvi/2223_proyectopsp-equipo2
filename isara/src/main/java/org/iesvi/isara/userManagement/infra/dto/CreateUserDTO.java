@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * This class saves all the information about the UserDTO
  *
  * @author Isa González & Sara Palma
  */

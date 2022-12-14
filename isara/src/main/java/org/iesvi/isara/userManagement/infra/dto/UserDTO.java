@@ -5,6 +5,8 @@ import lombok.Setter;
 import org.iesvi.isara.shared.domain.UserAddress;
 
 /**
+ * The UserDTO has the information about the
+ * user
  *
  * @author Isa González & Sara Palma
  */
