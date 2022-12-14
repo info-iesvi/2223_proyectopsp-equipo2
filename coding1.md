@@ -152,6 +152,8 @@ The model annotations that allow persistence in JPA are those used in the User, 
 
 ![image](https://user-images.githubusercontent.com/98974760/207416419-73e7c523-0493-437f-8980-eab3c7e7ce42.png)
 
+JPA methods can be used, even if they are not declared, because the repository interfaces extend from JPARespository.
+
 The Maven dependency used that allows JPA to be available is the following:
 
 	<dependency>
