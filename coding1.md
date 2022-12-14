@@ -122,6 +122,7 @@ Several DTO classes have been made for each entity. These are:
 - **UpdateUserDTO** and **UpdateUserAdminDTO** to modify a specific user by id.
 - **UserDTOConverter**, **UserAdminDTOConverter** and **AddressDTOConverter** to parse from User (or UserAdmin or UserAddress) to UserDTO (or UserAdminDTO or AddressDTO).
 - **AddressDTO** to create a new address or to modify a specific address by id.
+
 To make the conversion to DTO, the ModelMapper pattern has been used, which is a Java library to map properties from one type of object to another, so for example we can transform a User into UserDTO.
 
 ![image](https://user-images.githubusercontent.com/98974760/207697287-4137d05f-2a5a-44e7-a000-5fd85185572f.png)
@@ -151,7 +152,6 @@ The model annotations that allow persistence in JPA are those used in the User, 
 
 ![image](https://user-images.githubusercontent.com/98974760/207416419-73e7c523-0493-437f-8980-eab3c7e7ce42.png)
 
-
 The Maven dependency used that allows JPA to be available is the following:
 
 	<dependency>
@@ -179,4 +179,16 @@ Several tests have been carried out to verify that the application works, so thr
 
 #### MySQL
 
+<dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.30</version>
+        </dependency>
+
 #### PostgresSQL
+
+<dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.4.3</version>
+        </dependency>
