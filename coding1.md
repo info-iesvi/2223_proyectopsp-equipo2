@@ -179,7 +179,7 @@ Several tests have been carried out to verify that the application works, so thr
 
 #### MySQL
 
-<dependency>
+	<dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.30</version>
@@ -187,7 +187,7 @@ Several tests have been carried out to verify that the application works, so thr
 
 #### PostgresSQL
 
-<dependency>
+	<dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>42.4.3</version>
