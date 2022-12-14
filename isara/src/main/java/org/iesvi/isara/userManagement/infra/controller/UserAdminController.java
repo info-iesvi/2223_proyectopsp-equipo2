@@ -42,8 +42,10 @@ public class UserAdminController {
      */
     @GetMapping("/users/admin")
     public ResponseEntity<?> getAllUsersAdmin() {
+        // The method findAll() looks for all the user admin into the repository.
         List<UserAdmin> userAdminList = userAdminRepository.findAll();
 
+        //If the userAdminList is Empty, it will return the message 404 "Not Found"
         if (userAdminList.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
@@ -63,8 +65,10 @@ public class UserAdminController {
      */
     @GetMapping("/user/admin/{id}")
     public ResponseEntity<?> getUserAdminById(@PathVariable Long id) {
+        // The method findById() looks for a user admin into the repository by the user admin identification.
         UserAdmin userAdmin = userAdminRepository.findById(id).orElse(null);
 
+        // If the User called user is null, we will receive a 404 http response code; if not, we will get the 200 http code
         if (userAdmin == null) {
             return ResponseEntity.notFound().build();
         }
@@ -90,6 +94,7 @@ public class UserAdminController {
         userAdmin.setEmail(newUserAdmin.getEmail());
         userAdmin.setSalary(newUserAdmin.getSalary());
 
+        // If the user admin is created correctly, it will return the 201 Http response code
         return ResponseEntity.status(HttpStatus.CREATED).body(userAdminRepository.save(userAdmin));
     }
 
@@ -115,6 +120,8 @@ public class UserAdminController {
             userAdmin.setSalary(editUserAdmin.getSalary());
 
             return ResponseEntity.ok(userAdminRepository.save(userAdmin));
+
+            // If the user edits incorrectly, it will return the 404 Http response code
         }).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
@@ -122,7 +129,7 @@ public class UserAdminController {
      * Method to delete a user by his ID
      *
      * @param id User identifier.
-     * @return 204 No Content if the user was successfully deleted, 404 Not Found if the user was not found.
+     * @return 202 No Content if the user was successfully deleted, 404 Not Found if the user was not found.
      */
     @DeleteMapping("/user/admin/{id}")
     public ResponseEntity<?> deleteUserAdmin(@PathVariable Long id) {

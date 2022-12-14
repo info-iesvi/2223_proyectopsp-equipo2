@@ -74,6 +74,7 @@ public class UserAddressController {
         address.setPostalCode(newAddress.getPostalCode());
         address.setCity(newAddress.getCity());
 
+        // If the user address is created correctly, it will return the 201 Http response code
         return ResponseEntity.status(HttpStatus.CREATED).body(addressRepository.save(address));
     }
 
@@ -86,12 +87,19 @@ public class UserAddressController {
      */
     @PutMapping("/address/{id}")
     public ResponseEntity<?> editAddress(@RequestBody AddressDTO editAddress, @PathVariable Long id) {
+        // This looks for the user address by id to edit the attributes
         return addressRepository.findById(id).map(userAddress -> {
+
+            // We put the new information
             userAddress.setKindOfStreet(editAddress.getKindOfStreet());
             userAddress.setStreetName(editAddress.getStreetName());
             userAddress.setPostalCode(editAddress.getPostalCode());
             userAddress.setCity(editAddress.getCity());
+
+            // If the user address edits correctly, it will return the 200 Http response code
             return ResponseEntity.ok(addressRepository.save(userAddress));
+
+            // If the user address edits incorrectly, it will return the 404 Http response code
         }).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
@@ -99,14 +107,16 @@ public class UserAddressController {
      * Method to delete an address by ID
      *
      * @param id Address identifier.
-     * @return 204 No Content if the address was successfully deleted, 404 Not Found if the address was not found.
+     * @return 202 No Content if the address was successfully deleted, 404 Not Found if the address was not found.
      */
     @DeleteMapping("/address/{id}")
     public ResponseEntity<?> deleteAddress(@PathVariable Long id) {
+        // If the id exists, we will delete the user address and get the 202 http response code
         if (addressRepository.existsById(id)) {
             addressRepository.deleteById(id);
             return ResponseEntity.noContent().build();
         }
+        // If it doesn't exist, we will get the 404 http response code (Not found)
         else {
             return ResponseEntity.notFound().build();
         }

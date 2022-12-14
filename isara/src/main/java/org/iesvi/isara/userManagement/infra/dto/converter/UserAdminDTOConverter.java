@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
+ * This DTO class converts a UserAdmin object to a UserAdminDTO using the ModelMapper class.
  *
  * @author Isa González & Sara Palma
  */
