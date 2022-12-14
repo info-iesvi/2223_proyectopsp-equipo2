@@ -96,7 +96,7 @@ public class UserAddressController {
     }
 
     /**
-     * Method to delete a address by ID
+     * Method to delete an address by ID
      *
      * @param id Address identifier.
      * @return 204 No Content if the address was successfully deleted, 404 Not Found if the address was not found.
