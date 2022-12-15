@@ -206,7 +206,7 @@ Next, in addition to creating the database, the application has been started to 
 
 And finally several test users have been introduced, one of them has been modified and it has been verified that the changes have been saved in the database.
 
-![proyecto-mysql_prueba](https://user-images.githubusercontent.com/98974760/207920968-b27e6a76-588b-4d29-a714-0d5e845aff9a.png)
+![image](https://user-images.githubusercontent.com/98974760/207921880-c5a93c36-8a4d-43a8-a8e3-afcc112dabcd.png)
 
 
 #### PostgresSQL
