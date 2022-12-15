@@ -180,14 +180,37 @@ Several tests have been carried out to verify that the application works, so thr
 ![image](https://user-images.githubusercontent.com/98974760/207420921-c1fa6208-d559-4b72-bf49-084e44f4251e.png)
 
 #### MySQL
+The Maven dependency used to make the connection to MySQL is as follows:
 
 	<dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.30</version>
         </dependency>
+	
+To configure the connection with MySQL, firstly a volume and a container have been created in DOCKER.
+
+![proyecto-mysql](https://user-images.githubusercontent.com/98974760/207919510-979a1262-50b3-425b-81e4-b2ef776d3c1c.png)
+
+In addition, the lines seen below have been included in the application.properties. It includes the MySQL Driver, the url of the database, the 'root' user and its password.
+
+![image](https://user-images.githubusercontent.com/98974760/207919722-aa8c6ff4-ab53-4376-a393-6716566bd867.png)
+
+We are asked to create a user other than root. With the following commands, written directly in the console, we have created it, with a password and giving it all the privileges.
+
+![proyecto-mysql_crearUsuario](https://user-images.githubusercontent.com/98974760/207920452-a953aab5-cae4-4ded-ba71-36fdefe54e48.png)
+
+Next, in addition to creating the database, the application has been started to verify that the tables are created without problem.
+
+![proyecto-mysql_crearBD](https://user-images.githubusercontent.com/98974760/207920722-51c0e50a-8528-4f06-b7be-51051fb9d332.png)
+
+And finally several test users have been introduced, one of them has been modified and it has been verified that the changes have been saved in the database.
+
+![proyecto-mysql_prueba](https://user-images.githubusercontent.com/98974760/207920968-b27e6a76-588b-4d29-a714-0d5e845aff9a.png)
+
 
 #### PostgresSQL
+The Maven dependency used to make the connection to PostgresSQL is as follows:
 
 	<dependency>
             <groupId>org.postgresql</groupId>
