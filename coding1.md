@@ -219,3 +219,19 @@ The Maven dependency used to make the connection to PostgresSQL is as follows:
             <artifactId>postgresql</artifactId>
             <version>42.4.3</version>
         </dependency>
+
+To configure the connection with PostgreSQL, firstly a volume and a container have been created in DOCKER.
+
+![proyecto-postgresql](https://user-images.githubusercontent.com/98974760/207940881-3440b888-46c9-435f-92e1-637236e906ed.png)
+
+In addition, the lines seen below have been included in the application.properties. It includes the PostgreSQL Driver and the url of the database.
+
+![proyecto-postgresql_properties](https://user-images.githubusercontent.com/98974760/207941044-5d6cb580-973d-4f23-9a84-eccc2071666a.png)
+
+Next, in addition to creating the database, the application has been started to verify that the tables are created without problem.
+
+![proyecto-postgresql_tablas](https://user-images.githubusercontent.com/98974760/207941155-99c4ba09-c916-4286-86e4-9949ee46efb9.png)
+
+And finally several test users have been introduced, one of them has been modified and it has been verified that the changes have been saved in the database.
+
+![proyecto-postgresql_prueba](https://user-images.githubusercontent.com/98974760/207941223-337ced45-3fcf-4d95-bf94-270f9319a0bc.png)
