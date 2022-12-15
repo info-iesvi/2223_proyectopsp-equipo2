@@ -67,6 +67,9 @@ The annotations that we have used in these controllers are the following:
 
 
 ### Object declaration to achieve layer decoupling through dependency injection.
+In the following classes, we declarate objects to achieve layer decoupling through dependency injection: _UserController_, _UserAdminController_ and _UserAddressController_. The reason we do this is to be able to perform CRUD operations as we can see in the following image:
+
+![image](https://user-images.githubusercontent.com/58866375/207930462-9ed61c7a-5b75-4078-9212-079caecca5af.png)
 
 
 ### Testing with Postman
@@ -79,8 +82,7 @@ The Postman tool has been used to test the CRUD methods created for both User an
 
 ![image](https://user-images.githubusercontent.com/98974760/206924171-d8d848f3-be86-4d3a-9c4f-b5754755c427.png)
 
-3. **List a user by id**: Enter the identifier of the user you want to search for and display the user's data, if it exists in the repository.
-
+3. **List a user by id**: Enter the identifier of the user you want to search for and display the user's data, if it exists in the reposit
 ![image](https://user-images.githubusercontent.com/98974760/206924242-2b4dfe79-1505-4357-98b0-8b2a326dc86d.png)
 
 4. **Create a new address**: Enter the data of the new address to be saved in the repository.
