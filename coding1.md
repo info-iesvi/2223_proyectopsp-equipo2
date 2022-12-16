@@ -235,3 +235,6 @@ Next, in addition to creating the database, the application has been started to 
 And finally several test users have been introduced, one of them has been modified and it has been verified that the changes have been saved in the database.
 
 ![proyecto-postgresql_prueba](https://user-images.githubusercontent.com/98974760/207941223-337ced45-3fcf-4d95-bf94-270f9319a0bc.png)
+
+![image](https://user-images.githubusercontent.com/98974760/208094100-33248c05-c25c-496b-bb8a-14ba7def650d.png)
+
