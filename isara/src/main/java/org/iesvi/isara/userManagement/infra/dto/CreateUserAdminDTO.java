@@ -4,8 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * This class transmits User Admin information
  *
- * @author Isa González
+ * @author Isa González & Sara Palma
  */
 @Getter
 @Setter

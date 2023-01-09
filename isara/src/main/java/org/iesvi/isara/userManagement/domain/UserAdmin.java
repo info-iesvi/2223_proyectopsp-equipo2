@@ -8,19 +8,12 @@ import lombok.NoArgsConstructor;
 /**
  * Child class that extends the user class.
  *
- * @author Isa González
+ * @author Isa González & Sara Palma
  */
 @Entity
-@Table(name = "userAdmin")
 @Data
-@AllArgsConstructor @NoArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserAdmin extends User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_admin", nullable = false)
-    private Long idAdmin;
     private Double salary;
-
-    @JoinColumn(name = "user_id")
-    private Integer userId;
 }

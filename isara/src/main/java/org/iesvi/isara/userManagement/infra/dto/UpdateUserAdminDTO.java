@@ -5,8 +5,9 @@ import lombok.Setter;
 import org.iesvi.isara.shared.domain.UserAddress;
 
 /**
+ * This class has the attributes of UserAdminDTO
  *
- * @author Isa González
+ * @author Isa González & Sara Palma
  */
 @Getter
 @Setter

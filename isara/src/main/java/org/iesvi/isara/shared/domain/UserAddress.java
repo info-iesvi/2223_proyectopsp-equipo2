@@ -8,16 +8,16 @@ import lombok.NoArgsConstructor;
 /**
  * Auxiliary class to store user addresses.
  *
- * @author Isa González
+ * @author Isa González & Sara Palma
  */
 @Entity
-@Table(name = "address")
 @Data
-@AllArgsConstructor @NoArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserAddress {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_address", nullable = false)
+    @Column(nullable = false)
     private Long idAddress;
 
     private String kindOfStreet;

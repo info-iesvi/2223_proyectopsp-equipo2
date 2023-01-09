@@ -4,8 +4,9 @@ import org.iesvi.isara.userManagement.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
+ * This interface extends JpaRepository<User, Long>
  *
- * @author Isa González
+ * @author Isa González & Sara Palma
  */
 public interface UserRepository extends JpaRepository<User, Long> {
 }

@@ -3,78 +3,118 @@ In this first iteration in the development of the app we are going to start codi
 
 We are going to code following the Clean Architecture model (controller, service, repository), although, for now, we will simplify it by eliminating the Service layer as they are CRUD operations that only require access to the database and therefore no more business logic is developed than the access to the database itself to respond to the requests received by the controller.
 
+
 ## WEB PROGRAMMING PARADIGM: REST.
 We have implemented a controller that manages the functionalities on the User entity of the application, another for the UserAdmin entity and another for UserCustomer.
 
-### Annotations used.
+
+### Annotations used in the controller.
 The annotations that we have used in these controllers are the following:
-- **@RestController**
-	Types carrying this annotation are treated as controllers where @RequestMapping methods assume the default semantics of @ResponseBody.
-	
-- **@RequiredArgsConstructor**<br>
-	It generates a constructor with 1 parameter for each field that requires special handling. All non-initialized final fields get a parameter, as well as any fields that are marked as @NonNull that aren't initialized where they are declared. For those fields marked with @NonNull, an explicit null check is also generated. The constructor will throw a NullPointerException if any of the parameters intended for the fields marked with @NonNull contain null. The order of the parameters match the order in which the fields appear in your class.
-	
-- **@RequestBody**<br>
-	This annotation maps the HttpRequest body to a transfer or domain object, enabling automatic deserialization of the inbound HttpRequest body onto a Java object. Spring automatically deserializes the JSON into a Java type, assuming an appropriate one is specified. By default, the type we annotate with the @RequestBody annotation must correspond to the JSON sent from our client-side controller.
-	
-- **@PathVariable**<br>
-	This annotation can be used to handle template variables in the request URI mapping, and set them as method parameters.
-	
-- **@GetMapping**<br>
-	Annotation to map HTTP GET requests to specific controller methods. It is a compound annotation that acts as a shortcut for @RequestMapping.
-	
-- **@PostMapping**<br>
-	Annotation to map POST HTTP requests to specific controller methods. It is a compound annotation that acts as a shortcut for @RequestMapping.
-	
-- **@PutMapping**<br>
-	Annotation to map HTTP PUT requests to specific controller methods. It is a compound annotation that acts as a shortcut for @RequestMapping.
-	
-- **@DeleteMapping**<br>
-	Annotation to map HTTP DELETE requests to specific controller methods. It is a composite annotation that acts as a shortcut for @RequestMapping.
-	
-- **@Entity**<br>
-	It allows you to work with data in the form of domain-specific properties and objects, such as customers and customer addresses, without having to worry about the underlying database tables and columns where this data is stored.
-	
-- **@Data**<br>
-	It is a convenient shortcut annotation that bundles the features of @ToString, @EqualsAndHashCode, @Getter / @Setter and @RequiredArgsConstructor together: In other words, @Data generates all the boilerplate that is normally associated with simple POJOs (Plain Old Java Objects) and beans: getters for all fields, setters for all non-final fields, and appropriate toString, equals and hashCode implementations that involve the fields of the class, and a constructor that initializes all final fields, as well as all non-final fields with no initializer that have been marked with @NonNull, in order to ensure the field is never null.
-	@Data is like having implicit @Getter, @Setter, @ToString, @EqualsAndHashCode and @RequiredArgsConstructor annotations on the class (except that no constructor will be generated if any explicitly written constructors already exist). However, the parameters of these annotations (such as callSuper, includeFieldNames and exclude) cannot be set with @Data. If you need to set non-default values for any of these parameters, just add those annotations explicitly; @Data is smart enough to defer to those annotations.
-	
-- **@AllArgsConstructor**<br>
-	It generates a constructor with 1 parameter for each field in your class. Fields marked with @NonNull result in null checks on those parameters.
-	
-- **@NoArgsConstructor**<br>
-	It will generate a constructor with no parameters. If this is not possible (because of final fields), a compiler error will result instead, unless @NoArgsConstructor(force = true) is used, then all final fields are initialized with 0 / false / null. For fields with constraints, such as @NonNull fields, no check is generated,so be aware that these constraints will generally not be fulfilled until those fields are properly initialized later. Certain java constructs, such as hibernate and the Service Provider Interface require a no-args constructor. This annotation is useful primarily in combination with either @Data or one of the other constructor generating annotations.
-	
-- **@Id**<br>
-	As in tables, entities also require an identifier (@Id), which must differentiate the entity from the rest. As a general rule, all entities must define an ID, otherwise we will cause the EntityManager to mark an error when instantiating it. The ID is important because it will be used by the EntityManager when persisting an object, and it is because of this that it can determine which record to do the select, update or delete on. JPA supports simple IDs with a single field or complex IDs made up of more than one field. To determine the ID of an entity is as simple as putting the @Id annotation on the property that would be the ID of the entity. The ID can be any data type supported by JPA, such as all primitive types and wrapper classes, enumerations, and Calendar.
-	
-- **@GeneratedValue**<br>
-	This annotation provides the specification of generation strategies for primary key values. The strategy attribute is used to specify the primary key generation strategy that the persistence provider should use to generate the annotated entity's primary key. It is an optional attribute. The values ​​of the strategy are defined in the javax.persistence.GeneratorType enumeration, which are as follows: AUTO (based on database support for the primary key generation framework, decides what type of generator to use), IDENTITY (in this case the database is responsible for determining and assigning the next primary key), SEQUENCE (a sequence specifies a database object that can be used as a source of primary key values; uses @SequenceGenerator), TABLE ( maintains a separate table with the primary key values; uses @TableGenerator). The default is AUTO.
-	
-- **@Column**<br>
-	This annotation will allow us to define very important aspects of the database columns such as name, length, constraints, etc. In case of not defining this annotation in the attributes, JPA will determine the name of the column automatically through the name of the attribute, so it is always advisable to establish this annotation in all the attributes of the class and avoid problems.
-	
-	The properties that we can define are: name (allows you to set the name of the column of the table with which the attribute must map), length (allows you to define the length of the column in characters, only applies to Strings, in other types of data will be omitted), insertable (indicates to JPA if that column should be taken into account in the inserts, if it is 'true', the value will be inserted, otherwise the value will be omitted and the value ' will be placed default' of the column or 'null'), updatable (similar to the previous case, only in this case the column is taken into account for Update operations), nullable (creates a constraint on the table, 'not null', to prevent null values ​​from being inserted), scale (used only for columns that must have decimals, as values ​​it receives the number of decimals), table, unique (will create a table constraint to make the value of that column unique).
-	
-- **@ManyToOne**<br>
-	Allows you to map one entity to another. As the only rule, the class needs to be an entity, that is, it is also annotated with @Entity. It has the following attributes: optional (indicates if the relationship is optional, that is, if the object can be null), cascade (this property indicates which cascading operations can be performed with the related entity, possible values ​​are ALL, PERSIST , MERGE, REMOVE, REFRESH, DETACH and are defined in the javax.persistence.CascadeType enumeration), fetch (this property is used to determine how the entity should be loaded, the values ​​are defined in the javax.persistence.FetchType enumeration and the possible values ​​are eager and lazy), targetEntity (this property receives a class which corresponds to the class of the relationship).
-	
-- **@JoinColumn**<br>
-	It is used to mark a property that requires a JOIN in order to access it. It has almost the same properties as @Column. With @JoinColumn we could define the exact name of the column, if it admits nulls, if it is updateable, insertable, indicate if we want it to generate the foreign key or not or even tell it to generate the Join.
-	
-	The properties are the following: name (indicates the name with which the column must be created within the table), referencedColumnName (used to indicate the column on which the Join of the other table will be performed), unique (creates a constraints in the table to prevent duplicate values), nullable (creates a constraint on the table to prevent null values), insertable (tells JPA if this value should be saved on the insert operation), updatable (tells JPA if the value must be updated during the update process), columnDefinition (this property is used to indicate the SQL statement that should be used when creating the column in the database; it helps us to define exactly how the column will be created without depending on the configuration of JPA), table (we indicate on which table the JOIN should be performed), foreignKey (indicates to JPA if it should create the Foreign Key, this property receives one of the following values ​​CONSTRAINT, NO_CONSTRA INTS, PROVIDER_DEFAULT, defined in the javax.persistence.ForeighKey enumeration.
-	
-- **@Getter** and **@Setter**<br>
-	You can annotate any field with @Getter and/or @Setter, to let lombok generate the default getter/setter automatically. A default getter simply returns the field, and is named getFoo if the field is called foo (or isFoo if the field's type is boolean). A default setter is named setFoo if the field is called foo, returns void, and takes 1 parameter of the same type as the field. It simply sets the field to this value.
-	The generated getter/setter method will be public unless you explicitly specify an AccessLevel, as shown in the example below. Legal access levels are PUBLIC, PROTECTED, PACKAGE, and PRIVATE.
-	
-	You can also put a @Getter and/or @Setter annotation on a class. In that case, it's as if you annotate all the non-static fields in that class with the annotation.
+- **@RestController**: Annotation to identify the controller.
+- **@RequiredArgsConstructor**: Generates a constructor with any special arguments that the class has, such as those that are final or those marked as @NotNull.
+- **@RequestMapping("/isara")**: Annotation that is responsible for relating a method or a class, as in this case, with an http request.
+
+![image](https://user-images.githubusercontent.com/98974760/207098698-156c6450-6eee-4a33-95a6-e931ad6ff6a7.png)
+
+- **@GetMapping**: Annotation to map HTTP GET requests to specific controller methods. It is a compound annotation that acts as a shortcut for @RequestMapping. In these controllers it is used to list users or to display a user by id. It is also used in the Address controller.
+
+![image](https://user-images.githubusercontent.com/98974760/207100731-afd81b58-25fd-4533-bf1d-f7a04ce64c6b.png)
+![image](https://user-images.githubusercontent.com/98974760/207100825-dd899b1e-4e01-41aa-90c2-66d46f3e692e.png)
+
+- **@PostMapping**: Annotation to map POST HTTP requests to specific controller methods. It is a compound annotation that acts as a shortcut for @RequestMapping. In these controllers it is used to create new users or addresses.
+
+![image](https://user-images.githubusercontent.com/98974760/207101156-1124d3ae-c9e7-46d6-8975-5d60cdf2b965.png)
+
+- **@PutMapping**: Annotation to map HTTP PUT requests to specific controller methods. It is a compound annotation that acts as a shortcut for @RequestMapping. In these controllers it is used to modify existing users or addresses.
+
+![image](https://user-images.githubusercontent.com/98974760/207101463-fdf7513d-e329-4194-87ce-f7f1ebac4950.png)
+
+- **@DeleteMapping**: Annotation to map HTTP DELETE requests to specific controller methods. It is a composite annotation that acts as a shortcut for @RequestMapping. In these controllers it is used to delete existing users or addresses.
+
+![image](https://user-images.githubusercontent.com/98974760/207101704-77867ce8-798b-42d1-b9bd-842287fdf59e.png)
+
+- **@PathVariable**: This annotation is used to set the input parameter of the HTTP request.
+
+![image](https://user-images.githubusercontent.com/98974760/207102954-19577ab9-f864-44c0-bd47-584ad31e3223.png)
+
+- **@RequestBody**: This annotation is used to capture the input data in the body of the HttpRequest, which will be sent by the client in JSON format.
+
+![image](https://user-images.githubusercontent.com/98974760/207103144-3ff06f7e-bc6d-457a-aa0b-4c84b8916757.png)
+
+- **@Autowired**: Annotation that allows to inject some dependencies with others inside Spring.
+
+![image](https://user-images.githubusercontent.com/98974760/207104259-9893bdf1-a6ab-45bd-8f57-ac3017ce1f12.png)
 	
 
+### Other annotations.
+- **@SpringBootApplication**: This is an annotation that executes other 3 autoconfiguration with their default values: _@EnableAutoConfiguration, @ComponentScan_ and _@Configuration_.
+
+![image](https://user-images.githubusercontent.com/98974760/207429725-772a17ea-0214-47c1-b26d-14c98c587b9e.png)
+
+- **@Data**: It's a Lombok's annotation that creates _toString_, _equalsAndHashCode_, _getters_ and _setters_ and the _RequiredArgsConstructor_ too.
+
+![image](https://user-images.githubusercontent.com/98974760/207429887-20fb9f90-ae2a-4f3b-b53d-3ed5dd0550b8.png)
+
+- **@Getter and @Setter**: A default getter returns the field, and if, for example, it is called _getEmail_ if the field is called email; and a default setter is called _setEmail_ if the field is called email it returns void, and takes a parameter of the same type as the field.
+
+![image](https://user-images.githubusercontent.com/98974760/207429950-b4bbf878-9a94-4be0-995a-f3dbbcda5a58.png)
+
+- **@AllArgsConstructor**: It generates the constructor with all the arguments.
+- **@NoArgsConstructor**: It generates the constructor without arguments.
+- **@Inheritance(strategy = InheritanceType.JOINED)**: It's an annotation used to mark an annotation to be inherited to subclasses of the annotated class.
+
+![image](https://user-images.githubusercontent.com/98974760/207430050-b4a63112-ef09-478d-8704-fcbb90268afb.png)
+
+
 ### Object declaration to achieve layer decoupling through dependency injection.
+In the following classes, we declarate objects to achieve layer decoupling through dependency injection: _UserController_, _UserAdminController_ and _UserAddressController_. The reason we do this is to be able to perform CRUD operations as we can see in the following image:
+
+![image](https://user-images.githubusercontent.com/58866375/207930462-9ed61c7a-5b75-4078-9212-079caecca5af.png)
 
 
 ### Testing with Postman
+The Postman tool has been used to test the CRUD methods created for both User and UserAddress.
+1. **Create a new user**: Enter the username, password and email of the new user. This method would correspond to "Sing up".
+
+![image](https://user-images.githubusercontent.com/98974760/206924063-c7f7a745-4a74-4ea8-9428-175b58c130f7.png)
+
+2. **List all users**: This method lists all the users that are saved in the repository with all their data.
+
+![image](https://user-images.githubusercontent.com/98974760/206924171-d8d848f3-be86-4d3a-9c4f-b5754755c427.png)
+
+3. **List a user by id**: Enter the identifier of the user you want to search for and display the user's data, if it exists in the reposit
+![image](https://user-images.githubusercontent.com/98974760/206924242-2b4dfe79-1505-4357-98b0-8b2a326dc86d.png)
+
+4. **Create a new address**: Enter the data of the new address to be saved in the repository.
+
+![image](https://user-images.githubusercontent.com/98974760/206924290-006ae2ae-61f9-45f3-9edf-f26e9f55747e.png)
+
+5. **Edit user by id**: Enter the data of the user searched for by id that you want to change, including the address that can be entered either through the id of one that already exists or by entering all the data, if it does not exist yet, leaving these new data saved in the address repository.
+
+![image](https://user-images.githubusercontent.com/98974760/206924336-51d7c0f3-0721-4ff6-b532-ecfa009100b4.png)
+![image](https://user-images.githubusercontent.com/98974760/206924424-07198b40-b5df-4106-9b7f-88b41a380805.png)
+
+6. **List all address**: This method lists all the address that are saved in the repository with all their data.
+
+![image](https://user-images.githubusercontent.com/98974760/206924464-6ed2fd8d-d990-4090-8ea1-55981f175ea7.png)
+
+7. **Delete user by id**: Enter the id of the user you want to delete. If it exists in the repository, it is removed and the status 204 No Content appears; if it does not exist, the status 404 Not Found appears.
+
+![image](https://user-images.githubusercontent.com/98974760/206924492-bbd0bbea-6092-47ce-afb9-6eba459908e0.png)
+
+8. **Delete address by id**: Enter the id of the address you want to delete. If it exists in the repository, it is removed and the status 204 No Content appears; if it does not exist, the status 404 Not Found appears.
+
+![image](https://user-images.githubusercontent.com/98974760/206924700-3f6c5116-6e90-410c-8509-deef51a4fed6.png)
+
+
+### ResponseEntity
+ResponseEntity represents the complete HTTP response: status code, headers, and body. We have used the following responses:
+- **200 OK**: Indicates that the request has been successful, either by listing the users, showing the data of a specific one or editing it.
+- **201 Created**: Indicates that the request has been successful, and has performed the creation of the new object.
+- **204 No Content**: Indicates that the delete request was successful, but the client does not receive a response.
+- **404 Not Found**: Indicates that no result has been found, because the data has been entered incorrectly or because the database is empty.
+
+This has been used in controllers (see code).
 
 
 ### DTO classes
@@ -82,10 +122,39 @@ Several DTO classes have been made for each entity. These are:
 - **UserDTO** and **UserAdminDTO**
 - **CreateUserDTO** and **CreateUserAdminDTO** to create a new user.
 - **UpdateUserDTO** and **UpdateUserAdminDTO** to modify a specific user by id.
-- **UserDTOConverter** and **UserAdminDTOConverter** to parse from User (or UserAdmin) to UserDTO (or UserAdminDTO).
+- **UserDTOConverter**, **UserAdminDTOConverter** and **AddressDTOConverter** to parse from User (or UserAdmin or UserAddress) to UserDTO (or UserAdminDTO or AddressDTO).
+- **AddressDTO** to create a new address or to modify a specific address by id.
+
+To make the conversion to DTO, the ModelMapper pattern has been used, which is a Java library to map properties from one type of object to another, so for example we can transform a User into UserDTO.
+
+![image](https://user-images.githubusercontent.com/98974760/207697287-4137d05f-2a5a-44e7-a000-5fd85185572f.png)
+
 
 ## REPOSITORY LAYER
-The model annotations that allow persistence in JPA are those used in the User, UserAdmin, and UserCustomer classes. That is, @Entity, @Id, @GeneratedValue, @Column, @ManyToOne and @JoinColumn. All of them are explained in the previous section where all the annotations used in the application at the moment are.
+### JPA for data persistence
+The model annotations that allow persistence in JPA are those used in the User, UserAdmin, and UserCustomer classes. That is, @Entity, @Id, @GeneratedValue, @Column, @ManyToOne and @JoinColumn.
+- **@Entity**: Defines the entities that are going to be persisted in the database, corresponding to a table of the same, and their attributes with the columns.
+
+![image](https://user-images.githubusercontent.com/98974760/207414736-06aa7f4e-3aaa-47a5-8e7a-a29358969d97.png)
+
+- **@Id**: All classes with the @Entity annotation have to carry the @Id in a mandatory way, this being the attribute taken as the identifier of the entity.
+
+![image](https://user-images.githubusercontent.com/98974760/207414824-eb468292-e772-48f5-b14d-f32e541c9eae.png)
+
+- **@GeneratedValue**: Defines the primary key. You can put the strategy attribute to tell it to auto-generate, for example.
+
+![image](https://user-images.githubusercontent.com/98974760/207415378-6058af58-d57c-41d1-a116-1748f62413ef.png)
+
+- **@Column**: With this annotation you can define such important aspects of the database columns as name, length, restrictions, etc. In case of not defining this annotation in the attributes, JPA will determine the name of the column automatically through the name of the attribute. In this case, it has only been defined to be non-nullable.
+
+![image](https://user-images.githubusercontent.com/98974760/207414824-eb468292-e772-48f5-b14d-f32e541c9eae.png)
+
+- **ManyToOne**: Relates two entities to each other, with a many-to-one relationship.
+- **@JoinColumn**: It is used to indicate a foreign key, that is, that through the attribute you are joining two entities.
+
+![image](https://user-images.githubusercontent.com/98974760/207416419-73e7c523-0493-437f-8980-eab3c7e7ce42.png)
+
+JPA methods can be used, even if they are not declared, because the repository interfaces extend from JPARespository.
 
 The Maven dependency used that allows JPA to be available is the following:
 
@@ -95,3 +164,77 @@ The Maven dependency used that allows JPA to be available is the following:
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
+
+### Database managers
+The configuration of the connection with the different databases is done in the _application.properties_. There you specify the server port (if it is different from the 8080 that Tomcat uses by default), the username and password, and a number of other settings, depending on the chosen database.
+
+#### H2
+**H2** is a relational database and works like an in-memory database, that is, it doesn't save changes from session to session. To start it, it is necessary to have configured the use of the h2-console in the _application.properties_ and, after starting our application, write in a browser _http://localhost:8083/h2-console_. Then the screen shown in the following image will appear, in which you will have to fill in the fields with the username, password and the url of the database defined in the same _application.properties_.
+
+![image](https://user-images.githubusercontent.com/98974760/207419346-c6a5b90d-dbd8-4151-8953-8a8edcd2876f.png)
+
+Several tests have been carried out to verify that the application works, so three new users have been added, then the first one has been modified, and finally the third one has been eliminated.
+
+![image](https://user-images.githubusercontent.com/98974760/207419651-85b62142-c6ba-4ae0-a5d0-ab9378aa1b7a.png)
+
+![image](https://user-images.githubusercontent.com/98974760/207420737-8a57d9e8-d4fb-4f29-8961-d5bab08398d2.png)
+
+![image](https://user-images.githubusercontent.com/98974760/207420921-c1fa6208-d559-4b72-bf49-084e44f4251e.png)
+
+#### MySQL
+The Maven dependency used to make the connection to MySQL is as follows:
+
+	<dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.30</version>
+        </dependency>
+	
+To configure the connection with MySQL, firstly a volume and a container have been created in DOCKER.
+
+![proyecto-mysql](https://user-images.githubusercontent.com/98974760/207919510-979a1262-50b3-425b-81e4-b2ef776d3c1c.png)
+
+In addition, the lines seen below have been included in the application.properties. It includes the MySQL Driver, the url of the database, the 'root' user and its password.
+
+![image](https://user-images.githubusercontent.com/98974760/207919722-aa8c6ff4-ab53-4376-a393-6716566bd867.png)
+
+We are asked to create a user other than root. With the following commands, written directly in the console, we have created it, with a password and giving it all the privileges.
+
+![proyecto-mysql_crearUsuario](https://user-images.githubusercontent.com/98974760/207920452-a953aab5-cae4-4ded-ba71-36fdefe54e48.png)
+
+Next, in addition to creating the database, the application has been started to verify that the tables are created without problem.
+
+![proyecto-mysql_crearBD](https://user-images.githubusercontent.com/98974760/207920722-51c0e50a-8528-4f06-b7be-51051fb9d332.png)
+
+And finally several test users have been introduced, one of them has been modified and it has been verified that the changes have been saved in the database.
+
+![image](https://user-images.githubusercontent.com/98974760/207921880-c5a93c36-8a4d-43a8-a8e3-afcc112dabcd.png)
+
+
+#### PostgresSQL
+The Maven dependency used to make the connection to PostgresSQL is as follows:
+
+	<dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.4.3</version>
+        </dependency>
+
+To configure the connection with PostgreSQL, firstly a volume and a container have been created in DOCKER.
+
+![proyecto-postgresql](https://user-images.githubusercontent.com/98974760/207940881-3440b888-46c9-435f-92e1-637236e906ed.png)
+
+In addition, the lines seen below have been included in the application.properties. It includes the PostgreSQL Driver and the url of the database.
+
+![proyecto-postgresql_properties](https://user-images.githubusercontent.com/98974760/207941044-5d6cb580-973d-4f23-9a84-eccc2071666a.png)
+
+Next, in addition to creating the database, the application has been started to verify that the tables are created without problem.
+
+![proyecto-postgresql_tablas](https://user-images.githubusercontent.com/98974760/207941155-99c4ba09-c916-4286-86e4-9949ee46efb9.png)
+
+And finally several test users have been introduced, one of them has been modified and it has been verified that the changes have been saved in the database.
+
+![proyecto-postgresql_prueba](https://user-images.githubusercontent.com/98974760/207941223-337ced45-3fcf-4d95-bf94-270f9319a0bc.png)
+
+![image](https://user-images.githubusercontent.com/98974760/208094100-33248c05-c25c-496b-bb8a-14ba7def650d.png)
+

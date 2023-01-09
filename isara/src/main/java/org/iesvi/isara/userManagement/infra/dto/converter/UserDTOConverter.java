@@ -7,8 +7,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 /**
+ *This DTO class converts a User object to a UserDTO using the ModelMapper class.
  *
- * @author Isa González
+ * @author Isa González & Sara Palma
  */
 @Component
 @RequiredArgsConstructor
