@@ -35,28 +35,28 @@ public class UserAdminController {
     @Autowired
     private final AddressRepository addressRepository;
 
-    /**
-     * Method to obtain a list with all users.
-     *
-     * @return 404 Not Found if it does not find any user, 200 OK if it finds users and the list of them.
-     */
-    @GetMapping("/users/admin")
-    public ResponseEntity<?> getAllUsersAdmin() {
-        // The method findAll() looks for all the user admin into the repository.
-        List<UserAdmin> userAdminList = userAdminRepository.findAll();
-
-        //If the userAdminList is Empty, it will return the message 404 "Not Found"
-        if (userAdminList.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        //If the userAdminList is not Empty, it will return the message 200 "Ok"
-        else {
-            List<UserAdminDTO> userAdminDTOList = userAdminList.stream()
-                    .map(userAdminDTOConverter::convertToDto)
-                    .collect(Collectors.toList());
-            return ResponseEntity.ok(userAdminDTOList);
-        }
-    }
+//    /**
+//     * Method to obtain a list with all users.
+//     *
+//     * @return 404 Not Found if it does not find any user, 200 OK if it finds users and the list of them.
+//     */
+//    @GetMapping("/users/admin")
+//    public ResponseEntity<?> getAllUsersAdmin() {
+//        // The method findAll() looks for all the user admin into the repository.
+//        List<UserAdmin> userAdminList = userAdminRepository.findAll();
+//
+//        //If the userAdminList is Empty, it will return the message 404 "Not Found"
+//        if (userAdminList.isEmpty()) {
+//            return ResponseEntity.notFound().build();
+//        }
+//        //If the userAdminList is not Empty, it will return the message 200 "Ok"
+//        else {
+//            List<UserAdminDTO> userAdminDTOList = userAdminList.stream()
+//                    .map(userAdminDTOConverter::convertToDto)
+//                    .collect(Collectors.toList());
+//            return ResponseEntity.ok(userAdminDTOList);
+//        }
+//    }
 
     /**
      * Method to get a user by his ID.

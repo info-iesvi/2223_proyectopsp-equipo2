@@ -16,9 +16,9 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class UserAdminDTOConverter {
     @Autowired
-    private ModelMapper modelMapper;
+    private static ModelMapper modelMapper;
 
-    public UserAdminDTO convertToDto(UserAdmin userAdmin) {
+    public static UserAdminDTO convertToDto(UserAdmin userAdmin) {
         return modelMapper.map(userAdmin, UserAdminDTO.class);
     }
 }

@@ -14,11 +14,10 @@ public class UserAdminService {
     private UserAdminRepository userAdminRepository;
 
     public List<UserAdminDTO> getAllUserAdmin() {
-        UserAdminDTOConverter a = null;
         List<UserAdmin> adminList = userAdminRepository.findAll();
         List<UserAdminDTO> adminDTOList = new ArrayList<>();
         for (UserAdmin userAdmin : adminList) {
-            UserAdminDTO adminDTO = a.convertToDto(userAdmin);
+            UserAdminDTO adminDTO = UserAdminDTOConverter.convertToDto(userAdmin);
             adminDTOList.add(adminDTO);
         }
         return adminDTOList;
