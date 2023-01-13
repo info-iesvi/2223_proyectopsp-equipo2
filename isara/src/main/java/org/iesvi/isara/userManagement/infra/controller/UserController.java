@@ -160,46 +160,46 @@ public class UserController {
         }
     }
 
-    @Autowired
-    private UserService userService;
-
-    /**
-     *
-     * @param user
-     * @return userService.saveUser(user)
-     */
-    @PostMapping("/user")
-    public User signIn(@Validated @RequestBody User user) {
-        return userService.saveUser(user);
-    }
-
-    /**
-     *
-     * @return userService.getAllUsers()
-     */
-    @GetMapping("/users")
-    public List<User> viewUserList() {
-        return userService.getAllUsers();
-    }
-
-    /**
-     *
-     * @param id
-     * @param user
-     * @return userService.saveUser(user)
-     */
-    @PutMapping("/user/{id}")
-    public User updateUser(@PathVariable String id, @Validated @RequestBody User user) {
-        return userService.saveUser(user);
-    }
-
-    /**
-     * Method to delete a user by his ID
-     * @param id User identification
-     */
-    @DeleteMapping("/user/{id}")
-    public void deleteOneUser(@PathVariable Long id) {
-        userService.deleteUser(id);
-    }
+//    @Autowired
+//    private UserService userService;
+//
+//    /**
+//     *
+//     * @param user
+//     * @return userService.saveUser(user)
+//     */
+//    @PostMapping("/user")
+//    public User signIn(@Validated @RequestBody User user) {
+//        return userService.saveUser(user);
+//    }
+//
+//    /**
+//     *
+//     * @return userService.getAllUsers()
+//     */
+//    @GetMapping("/users")
+//    public List<User> viewUserList() {
+//        return userService.getAllUsers();
+//    }
+//
+//    /**
+//     *
+//     * @param id
+//     * @param user
+//     * @return userService.saveUser(user)
+//     */
+//    @PutMapping("/user/{id}")
+//    public User updateUser(@PathVariable String id, @Validated @RequestBody User user) {
+//        return userService.saveUser(user);
+//    }
+//
+//    /**
+//     * Method to delete a user by his ID
+//     * @param id User identification
+//     */
+//    @DeleteMapping("/user/{id}")
+//    public void deleteOneUser(@PathVariable Long id) {
+//        userService.deleteUser(id);
+//    }
 
 }

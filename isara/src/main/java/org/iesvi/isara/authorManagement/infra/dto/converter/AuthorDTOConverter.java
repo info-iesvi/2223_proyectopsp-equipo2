@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class AuthorDTOConverter {
-    private final ModelMapper modelMapper;
+    private static final ModelMapper modelMapper = null;
 
     public static AuthorDTO convertToDto(Author author) {
         return modelMapper.map(author, AuthorDTO.class);

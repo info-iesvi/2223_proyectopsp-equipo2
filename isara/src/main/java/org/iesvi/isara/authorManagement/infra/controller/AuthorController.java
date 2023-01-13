@@ -35,7 +35,7 @@ public class AuthorController {
 
     @PutMapping("/author/{id}")
     public Author updateAuthor(@PathVariable String id, @Validated @RequestBody Author author) {
-        return authorService.saveAuthor(author);
+        return authorService.editAuthor(author);
     }
 
     @DeleteMapping("/author/{id}")
