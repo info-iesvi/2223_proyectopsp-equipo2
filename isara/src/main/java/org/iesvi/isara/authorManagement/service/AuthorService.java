@@ -15,9 +15,7 @@ public class AuthorService {
     @Autowired
     private AuthorRepository authorRepository;
 
-    // TODO: Review method to use AuthorDTO
-
-    public List<Author> getAllAuthors() {
+    public List<AuthorDTO> getAllAuthors() {
         return AuthorDTOConverter.convertListToDto(authorRepository.findAll());
     }
 
@@ -32,6 +30,5 @@ public class AuthorService {
     public void deleteAuthor(Long id) {
         authorRepository.deleteById(id);
     }
-
 
 }

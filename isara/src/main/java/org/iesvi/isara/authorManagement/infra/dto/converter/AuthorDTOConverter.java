@@ -7,18 +7,17 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
 public class AuthorDTOConverter {
-    private static final ModelMapper modelMapper = null;
+    private static final ModelMapper modelMapper = new ModelMapper();
 
     public static AuthorDTO convertToDto(Author author) {
         return modelMapper.map(author, AuthorDTO.class);
     }
 
-    public static List<Author> convertListToDto(List<Author> all) {
-        return (List<Author>) modelMapper.map(all, AuthorDTO.class);
+    public static List<AuthorDTO> convertListToDto(List<Author> all) {
+        return (List<AuthorDTO>) modelMapper.map(all, AuthorDTO.class);
     }
 }
