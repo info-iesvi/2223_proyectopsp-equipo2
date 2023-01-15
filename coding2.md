@@ -57,6 +57,7 @@ The Book entity is linked to the Author entity, the latter being an attribute of
 ### PHASE 1. DOCKERISE THE DATABASE SERVICE
 
 Using the following command, we create a container in Docker with MySQL, where we specify the password of the user 'root', the user 'usuario' and its password, as well as the database 'proyecto'.
+
 `$ docker run -p 3306:3306 --name proyecto-mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_USER=usuario -e MYSQL_PASSWORD=usuario -e MYSQL_DATABASE=proyecto -v proyecto-mysql_data:/var/lib/mysql -d mysql:latest`
 
 ![image](https://user-images.githubusercontent.com/98974760/212563524-d450aa55-2466-4f21-8664-3e00aa695f5f.png)
