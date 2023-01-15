@@ -52,9 +52,40 @@ To test that all the Service layer methods work, we have used Postman with the f
 The Book entity is linked to the Author entity, the latter being an attribute of the former. Therefore, the 'author' attribute is the foreign key of the book.
 
 
-## DOCKERIZATION
+## DOCKERISING THE PROJECT
 
-### DATABASE
+### PHASE 1. DOCKERISE THE DATABASE SERVICE
+
+Using the following command, we create a container in Docker with MySQL, where we specify the password of the user 'root', the user 'usuario' and its password, as well as the database 'proyecto'.
+`$ docker run -p 3306:3306 --name proyecto-mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_USER=usuario -e MYSQL_PASSWORD=usuario -e MYSQL_DATABASE=proyecto -v proyecto-mysql_data:/var/lib/mysql -d mysql:latest`
+
+![image](https://user-images.githubusercontent.com/98974760/212563524-d450aa55-2466-4f21-8664-3e00aa695f5f.png)
+
+Then we check that it has been created correctly in Docker Desktop:
+
+![image](https://user-images.githubusercontent.com/98974760/212563536-85cb47b1-1c49-4f44-a987-00bbbdaad149.png)
+
+#### Connection from the container
+
+We test from the console if we can connect with the 'user' and we check the databases to which it has access, all with the following command.
+
+`$ docker exec -it proyecto-mysql /bin/bash`
+
+![image](https://user-images.githubusercontent.com/98974760/212563954-8c61459b-9de9-46de-a1d6-ae526cf24bf3.png)
+
+`# mysql -u usuario -p -h localhost`
+
+At this time, it asks us for the password. We introduce it to him and he already lets us in. And with the `show databases;` command we can check all the databases that the user has access to.
+
+![image](https://user-images.githubusercontent.com/98974760/212563975-4cc318dd-85b8-4fea-820f-9110bb4feb73.png)
+
+We look at the 'project' database with the `use project;` command and then check the tables it has created with the `show tables;` command.
+As it is the first time we enter this database, after creating it, we see that it is empty.
+
+![image](https://user-images.githubusercontent.com/98974760/212564081-101e92de-784b-480f-ab49-dcc71c5dd4a6.png)
+
+### PHASE 2. DOCKERISE THE APPLICATION
 
 
-### APP
+### PHASE 3. DEFINITION AND IMPLEMENTATION OF A MULTI-CONTAINER APP
+
