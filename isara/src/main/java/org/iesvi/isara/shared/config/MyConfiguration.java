@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
  * to another, based on conventions, in the same way that a human would - while providing a simple, refactoring-safe API
  * for handling specific use cases.
  *
- * @author Isa González & Sara Palma
+ * @author Isa & Sara
  */
 @Configuration
 public class MyConfiguration {

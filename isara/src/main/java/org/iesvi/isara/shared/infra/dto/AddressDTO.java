@@ -6,7 +6,7 @@ import lombok.Setter;
 /**
  * Class to transmit address information
  *
- * @author Isa González & Sara Palma
+ * @author Isa & Sara
  */
 
 @Getter

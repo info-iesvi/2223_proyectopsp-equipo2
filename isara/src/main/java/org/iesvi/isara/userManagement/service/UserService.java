@@ -7,6 +7,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * @author Isa & Sara
+ */
+
 @Service
 public class UserService {
     @Autowired

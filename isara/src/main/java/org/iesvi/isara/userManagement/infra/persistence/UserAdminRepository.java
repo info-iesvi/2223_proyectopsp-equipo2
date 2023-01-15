@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /**
  * This interface extends JpaRepository<UserAdmin, Long>
  *
- * @author Isa González & Sara Palma
+ * @author Isa & Sara
  */
 public interface UserAdminRepository extends JpaRepository<UserAdmin, Long> {
 }

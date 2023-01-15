@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 /**
  * Auxiliary class to store user addresses.
  *
- * @author Isa González & Sara Palma
+ * @author Isa & Sara
  */
 @Entity
 @Data

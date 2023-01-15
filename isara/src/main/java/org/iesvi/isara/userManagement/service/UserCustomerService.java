@@ -3,6 +3,9 @@ package org.iesvi.isara.userManagement.service;
 import org.iesvi.isara.userManagement.infra.persistence.UserCustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+/**
+ * @author Isa & Sara
+ */
 public class UserCustomerService {
     @Autowired
     private UserCustomerRepository userCustomerRepository;

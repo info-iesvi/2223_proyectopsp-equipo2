@@ -23,6 +23,11 @@ public class AuthorService {
     @Autowired
     private AuthorRepository authorRepository;
 
+    /**
+     * Method to list the authors of the repository.
+     *
+     * @return A list of authors.
+     */
     public List<AuthorDTO> getAllAuthors() {
         return AuthorDTOConverter.convertListToDto(authorRepository.findAll());
     }
@@ -37,10 +42,22 @@ public class AuthorService {
         return AuthorDTOConverter.convertToDto(authorRepository.findById(id));
     }
 
+    /**
+     * Method to save the data of the author in the repository.
+     * This method will be used both to create a new author and to edit an existing one.
+     *
+     * @param author The author's data.
+     * @return The data of the author.
+     */
     public AuthorDTO saveAuthor(Author author) {
         return AuthorDTOConverter.convertToDto(authorRepository.save(author));
     }
 
+    /**
+     * Method to delete an author by id.
+     *
+     * @param id Identification of author to delete.
+     */
     public void deleteAuthor(Long id) {
         authorRepository.deleteById(id);
     }

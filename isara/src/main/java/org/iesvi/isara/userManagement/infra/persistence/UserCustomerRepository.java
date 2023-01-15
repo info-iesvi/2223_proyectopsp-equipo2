@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /**
  * This interface extends JpaRepository<UserCustomer, Long>
  *
- * @author Isa González & Sara Palma
+ * @author Isa & Sara
  */
 public interface UserCustomerRepository extends JpaRepository<UserCustomer, Long> {
 }

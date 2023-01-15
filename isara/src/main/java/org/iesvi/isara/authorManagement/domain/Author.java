@@ -1,5 +1,9 @@
 package org.iesvi.isara.authorManagement.domain;
 
+/**
+ * @author Isa & Sara
+ */
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

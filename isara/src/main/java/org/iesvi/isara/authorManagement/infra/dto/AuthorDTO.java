@@ -5,6 +5,10 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
+/**
+ * @author Isa & Sara
+ */
+
 @Getter
 @Setter
 public class AuthorDTO {

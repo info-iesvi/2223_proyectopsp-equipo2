@@ -9,10 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Isa & Sara
+ */
+
 public class UserAdminService {
     @Autowired
     private UserAdminRepository userAdminRepository;
 
+    /**
+     *
+     * @return a list where we can see all the admin user that are registered
+     */
     public List<UserAdminDTO> getAllUserAdmin() {
         List<UserAdmin> adminList = userAdminRepository.findAll();
         List<UserAdminDTO> adminDTOList = new ArrayList<>();
@@ -23,5 +31,4 @@ public class UserAdminService {
         return adminDTOList;
     }
 
-    // TODO: Method to LOGIN a UserAdmin
 }
