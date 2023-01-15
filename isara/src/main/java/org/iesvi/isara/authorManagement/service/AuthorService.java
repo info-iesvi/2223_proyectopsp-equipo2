@@ -1,6 +1,8 @@
 package org.iesvi.isara.authorManagement.service;
 
 import org.iesvi.isara.authorManagement.domain.Author;
+import org.iesvi.isara.authorManagement.infra.dto.AuthorDTO;
+import org.iesvi.isara.authorManagement.infra.dto.converter.AuthorDTOConverter;
 import org.iesvi.isara.authorManagement.persistence.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,23 +16,22 @@ public class AuthorService {
     private AuthorRepository authorRepository;
 
     // TODO: Review method to use AuthorDTO
-    public Author saveAuthor(Author newAuthor) {
-        return authorRepository.save(newAuthor);
+
+    public List<Author> getAllAuthors() {
+        return AuthorDTOConverter.convertListToDto(authorRepository.findAll());
     }
 
-    public Author editAuthor(Author author) {
-        return authorRepository.save(author);
+    public Optional<Author> getAuthorById(Long id) {
+        return (authorRepository.findById(id));
+    }
+
+    public AuthorDTO saveAuthor(Author author) {
+        return AuthorDTOConverter.convertToDto(authorRepository.save(author));
     }
 
     public void deleteAuthor(Long id) {
         authorRepository.deleteById(id);
     }
 
-    public List<Author> getAllAuthors() {
-        return authorRepository.findAll();
-    }
 
-    public Optional<Author> getAuthorById(Long id) {
-        return authorRepository.findById(id);
-    }
 }
