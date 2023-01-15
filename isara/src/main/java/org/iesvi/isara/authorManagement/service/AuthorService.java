@@ -10,6 +10,14 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Service layer of the Author Entity.
+ * This serves as an intermediary between the Author class and the AuthorController controller.
+ */
+
+/**
+ * @author Isa & Sara
+ */
 @Service
 public class AuthorService {
     @Autowired
@@ -19,8 +27,14 @@ public class AuthorService {
         return AuthorDTOConverter.convertListToDto(authorRepository.findAll());
     }
 
-    public Optional<Author> getAuthorById(Long id) {
-        return (authorRepository.findById(id));
+    /**
+     * Method to display the data of an author by id.
+     *
+     * @param id Identification of author.
+     * @return The data of the author.
+     */
+    public AuthorDTO getAuthorById(Long id) {
+        return AuthorDTOConverter.convertToDto(authorRepository.findById(id));
     }
 
     public AuthorDTO saveAuthor(Author author) {

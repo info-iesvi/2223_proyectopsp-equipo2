@@ -8,6 +8,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class AuthorDTO {
+    private Long idAuthor;
     private String firstName;
     private String lastName;
     private LocalDate birthDate;

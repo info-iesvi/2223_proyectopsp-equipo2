@@ -25,10 +25,18 @@ public class UserAddress {
     private Integer postalCode;
     private String city;
 
+    /**
+     *
+     * @return the adress of the user's id
+     */
     public Long getIdAddress() {
         return idAddress;
     }
 
+    /**
+     *
+     * @param idAddress
+     */
     public void setIdAddress(Long idAddress) {
         this.idAddress = idAddress;
     }

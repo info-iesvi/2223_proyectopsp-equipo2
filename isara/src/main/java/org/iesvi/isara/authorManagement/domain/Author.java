@@ -17,8 +17,8 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
     private Long idAuthor;
-    private String firstNameAuthor;
-    private String lastNameAuthor;
+    private String firstName;
+    private String lastName;
     private LocalDate birthDate;
     private LocalDate deathDate;
     private String nationality;

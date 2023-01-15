@@ -35,6 +35,7 @@ public class AuthorController {
 
     @PutMapping("/author/{id}")
     public ResponseEntity<?> editAuthor(@RequestBody Author editAuthor, @PathVariable Long id) {
+        editAuthor.setIdAuthor(id);
         return ResponseEntity.ok(authorService.saveAuthor(editAuthor));
     }
 
