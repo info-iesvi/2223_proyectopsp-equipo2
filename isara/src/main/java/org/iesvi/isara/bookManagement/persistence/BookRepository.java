@@ -1,4 +1,7 @@
 package org.iesvi.isara.bookManagement.persistence;
 
-public interface BookRepository {
+import org.iesvi.isara.bookManagement.domain.Book;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface BookRepository extends JpaRepository<Book, Long> {
 }

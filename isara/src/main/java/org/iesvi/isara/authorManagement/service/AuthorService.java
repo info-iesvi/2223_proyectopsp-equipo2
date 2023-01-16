@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Service layer of the Author Entity.
@@ -47,7 +46,7 @@ public class AuthorService {
      * This method will be used both to create a new author and to edit an existing one.
      *
      * @param author The author's data.
-     * @return The data of the author.
+     * @return The data of the author saved.
      */
     public AuthorDTO saveAuthor(Author author) {
         return AuthorDTOConverter.convertToDto(authorRepository.save(author));
