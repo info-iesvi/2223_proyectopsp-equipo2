@@ -13,7 +13,7 @@ import org.iesvi.isara.authorManagement.domain.Author;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Book {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Long idBook;
     private String title;
