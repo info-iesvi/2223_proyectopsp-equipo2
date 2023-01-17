@@ -10,7 +10,7 @@
     </parent>
     <groupId>org.iesvi</groupId>
     <artifactId>isara</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.2.0</version>
     <name>isara</name>
     <description>isara</description>
     <properties>
@@ -96,7 +96,7 @@
                     </imageTags>
                     <resources>
                         <resource>
-                            <targetPath>../../src/main/docker</targetPath>
+                            <targetPath>/mnt/d/2022-2023_DAM/PSP/2223_proyectopsp-equipo2/isara/src/main/docker</targetPath>
                             <directory>${project.build.directory}</directory>
                             <include>${project.build.finalName}.jar</include>
                         </resource>
