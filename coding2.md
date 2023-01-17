@@ -100,9 +100,15 @@ After the version change, we should run the command ``mvn clean package`` so tha
 If any errors happen, details can be viewed adding `` -e`` to the Maven command from before.
 
 The process may break in a first run, it will probably happen because Maven is missing the JAR file in the Docker context.
+
+![image](https://user-images.githubusercontent.com/98974760/213020455-9f92edb0-0438-440a-b3c3-0e907705f8bc.png)
+
 To solve this, copy the JAR file generated in the first run (target/isara-x.x.x.jar) into the folder src/main/docker and run the Maven command again.
 
 Once we get a successful build, we can instantiate our application in Docker, with the steps described in Phase 3.
+
+![image](https://user-images.githubusercontent.com/98974760/213020006-00c62597-2d61-4df3-a5ba-d9fda5649d38.png)
+
 
 ### PHASE 3. DEFINITION AND IMPLEMENTATION OF A MULTI-CONTAINER APP
 
@@ -113,6 +119,9 @@ To start the container in the same terminal (container stops when closing the te
 ``docker-compose up``
 
 To start on its own process: ``docker-compose up -d``
+
+![image](https://user-images.githubusercontent.com/98974760/213020638-8a02a797-1d05-4cfc-ae23-3ea30fad31e5.png)
+
 
 To force the containers to be recreated even if they exist:
 ``docker-compose up -d --force-recreate``
