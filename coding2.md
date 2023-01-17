@@ -87,6 +87,21 @@ As it is the first time we enter this database, after creating it, we see that i
 
 ### PHASE 2. DOCKERISE THE APPLICATION
 
+Whenever we want to generate a new version of our image, we will need to change the version
+in the POM file, where we will see something like ``<version>0.0.1-SNAPSHOT</version>``.
+
+Versioning should be done in the following way:
+- Major versions (A.y.z): Planned upgrades that happen only when very big changes happen, like API signatures changing or different behaviours for established services.
+- Minor versions (x.A.z): Planned patches that happen with bug fixes or minor corrections that don't make a big difference in how the application behaves.
+- Revisions (x.y.A): Unplanned modifications, should be very small changes, documentation additions, and any non-planned or emergency "hotfixes" that don't follow a rigid protocol for change.
+
+After the version change, we should run the command ``mvn clean package`` so that the application is built and the image is compiled for use in Docker.
+If any errors happen, details can be viewed adding `` -e`` to the Maven command from before.
+
+The process may break in a first run, it will probably happen because Maven is missing the JAR file in the Docker context.
+To solve this, copy the JAR file generated in the first run (target/isara-x.x.x.jar) into the folder src/main/docker and run the Maven command again.
+
+Once we get a successful build, we can instantiate our application in Docker, with the steps described in Phase 3.
 
 ### PHASE 3. DEFINITION AND IMPLEMENTATION OF A MULTI-CONTAINER APP
 
