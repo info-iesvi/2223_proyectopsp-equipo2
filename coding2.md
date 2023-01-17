@@ -88,7 +88,8 @@ As it is the first time we enter this database, after creating it, we see that i
 ### PHASE 2. DOCKERISE THE APPLICATION
 
 Whenever we want to generate a new version of our image, we will need to change the version
-in the POM file, where we will see something like ``<version>0.0.1-SNAPSHOT</version>``.
+in the POM file, where we will see something like ``<version>0.2.0</version>``, and in
+the Dockerfile where we must change the JAR filename in something like ``ADD isara-0.2.0.jar app.jar``.
 
 Versioning should be done in the following way:
 - Major versions (A.y.z): Planned upgrades that happen only when very big changes happen, like API signatures changing or different behaviours for established services.
