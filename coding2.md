@@ -90,3 +90,21 @@ As it is the first time we enter this database, after creating it, we see that i
 
 ### PHASE 3. DEFINITION AND IMPLEMENTATION OF A MULTI-CONTAINER APP
 
+Config values stored in ``.env`` file. Different environments with different values can
+be used. One could have a ``docker-compose.pre.yml`` and a ``.env.pre``.
+
+To start the container in the same terminal (container stops when closing the terminal):
+``docker-compose up``
+
+To start on its own process: ``docker-compose up -d``
+
+To force the containers to be recreated even if they exist:
+``docker-compose up -d --force-recreate``
+
+To stop the containers: ``docker-compose down``
+
+To stop the containers and remove the images and networks:
+``docker-compose down --rmi all``
+
+Add ``--force`` if you also want its shared images removed,
+for example, mysql, used in several projects. USE CAREFULLY.
