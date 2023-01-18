@@ -133,3 +133,15 @@ To stop the containers and remove the images and networks:
 
 Add ``--force`` if you also want its shared images removed,
 for example, mysql, used in several projects. USE CAREFULLY.
+
+### PHASE 4. UPLOAD THE CONTAINER TO DOCKER HUB
+
+Once the multicontainer is generated in Docker with the database and the application, the next step is to upload the image to Docker Hub.
+
+To do this, we first log in to the Docker Hub page with the ``$ docker login`` command. Once you have entered the credentials that it will ask you for, if you were not logged in yet, write the command ``$ docker push <user>/<image_name>:<version>`` and that's it. We check our Docker Hub account to see if it was created successfully.
+
+![image](https://user-images.githubusercontent.com/98974760/213216759-5c257495-12bc-4aef-81d0-1d5139485f25.png)
+
+If we click on the repository, we can access it and read or edit its description. As well as other options, depending on the tab we select. But in this case we will be facing a common Docker Hub repository, usable by whoever wants from any computer.
+
+![image](https://user-images.githubusercontent.com/98974760/213217574-2bc303e6-b617-4c39-b3ba-610f6300a076.png)
