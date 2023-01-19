@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 /**
  * It converts the class AddressDTO into a modelMapper map
  *
- * @author Isa González & Sara Palma
+ * @author Isa & Sara
  */
 @Component
 @RequiredArgsConstructor

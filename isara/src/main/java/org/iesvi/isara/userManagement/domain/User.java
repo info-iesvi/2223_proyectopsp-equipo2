@@ -9,7 +9,7 @@ import org.iesvi.isara.shared.domain.UserAddress;
 /**
  * User parent class with common attributes for all users who will use the application.
  *
- * @author Isa González & Sara Palma
+ * @author Isa & Sara
  */
 @Entity
 @Data
@@ -18,7 +18,7 @@ import org.iesvi.isara.shared.domain.UserAddress;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Long idUser;
     private String userName;

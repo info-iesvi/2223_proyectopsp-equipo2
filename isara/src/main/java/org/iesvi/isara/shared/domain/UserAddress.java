@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 /**
  * Auxiliary class to store user addresses.
  *
- * @author Isa González & Sara Palma
+ * @author Isa & Sara
  */
 @Entity
 @Data
@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserAddress {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Long idAddress;
 
@@ -25,10 +25,18 @@ public class UserAddress {
     private Integer postalCode;
     private String city;
 
+    /**
+     *
+     * @return the adress of the user's id
+     */
     public Long getIdAddress() {
         return idAddress;
     }
 
+    /**
+     *
+     * @param idAddress
+     */
     public void setIdAddress(Long idAddress) {
         this.idAddress = idAddress;
     }
