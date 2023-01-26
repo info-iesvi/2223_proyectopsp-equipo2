@@ -1,6 +1,8 @@
 # DOCKERISING THE PROJECT
 
-## PHASE 1. DOCKERISE THE DATABASE SERVICE
+## WRITING COMANDS IN CONSOLE
+
+### PHASE 1. DOCKERISE THE DATABASE SERVICE
 
 Using the following command, we create a container in Docker with MySQL, where we specify the password of the user 'root', the user 'usuario' and its password, as well as the database 'proyecto'.
 
@@ -12,7 +14,7 @@ Then we check that it has been created correctly in Docker Desktop:
 
 ![image](https://user-images.githubusercontent.com/98974760/212563536-85cb47b1-1c49-4f44-a987-00bbbdaad149.png)
 
-### Connection from the container
+#### Connection from the container
 
 We test from the console if we can connect with the 'user' and we check the databases to which it has access, all with the following command.
 
@@ -31,7 +33,8 @@ As it is the first time we enter this database, after creating it, we see that i
 
 ![image](https://user-images.githubusercontent.com/98974760/212564081-101e92de-784b-480f-ab49-dcc71c5dd4a6.png)
 
-## PHASE 2. DOCKERISE THE APPLICATION
+
+### PHASE 2. DOCKERISE THE APPLICATION
 
 Whenever we want to generate a new version of our image, we will need to change the version
 in the POM file, where we will see something like ``<version>0.2.0</version>``, and in
@@ -56,7 +59,7 @@ Once we get a successful build, we can instantiate our application in Docker, wi
 ![image](https://user-images.githubusercontent.com/98974760/213020006-00c62597-2d61-4df3-a5ba-d9fda5649d38.png)
 
 
-## PHASE 3. DEFINITION AND IMPLEMENTATION OF A MULTI-CONTAINER APP
+### PHASE 3. DEFINITION AND IMPLEMENTATION OF A MULTI-CONTAINER APP
 
 Config values stored in ``.env`` file. Different environments with different values can
 be used. One could have a ``docker-compose.pre.yml`` and a ``.env.pre``.
@@ -80,7 +83,8 @@ To stop the containers and remove the images and networks:
 Add ``--force`` if you also want its shared images removed,
 for example, mysql, used in several projects. USE CAREFULLY.
 
-## PHASE 4. UPLOAD THE CONTAINER TO DOCKER HUB
+
+### PHASE 4. UPLOAD THE CONTAINER TO DOCKER HUB
 
 Once the multicontainer is generated in Docker with the database and the application, the next step is to upload the image to Docker Hub.
 
@@ -91,3 +95,44 @@ To do this, we first log in to the Docker Hub page with the ``$ docker login`` c
 If we click on the repository, we can access it and read or edit its description. As well as other options, depending on the tab we select. But in this case we will be facing a common Docker Hub repository, usable by whoever wants from any computer.
 
 ![image](https://user-images.githubusercontent.com/98974760/213217574-2bc303e6-b617-4c39-b3ba-610f6300a076.png)
+
+
+## IN INTELLIJ IDE
+
+1. Install the docker plugin in your IDE. To do this you have to go to the "File" tab and choose the "Settings" option (or press Ctrl + Alt + S). Then go to the "Plugins" section and search for "Docker". The one you have to install will appear first. Do it.
+2. Once installed, the "Docker" option should appear in the "Build, Execution, Deployment" section of the "Settings". Open the tab and click on "Docker Registry".
+
+![image](https://user-images.githubusercontent.com/98974760/214920697-0f67d7d7-4385-4f4b-a790-9ea260a1e97a.png)
+
+3. Here the + sign at the top is given to be able to connect the IDE with our Docker Hub account, filling in the fields as shown in the following image. If you do not have a user account in Docker Hub, we would have to create one previously.
+
+![image](https://user-images.githubusercontent.com/98974760/214921220-786fa793-374d-4e99-b45a-292f7fdd5632.png)
+
+4. Once our Docker Hub account is connected to the IDE, it should appear in the lower tab called "Service" with all the images and containers that we have both in our account and in our Docker installed.
+
+![image](https://user-images.githubusercontent.com/98974760/214923701-658edc5b-53e7-4713-bc10-7875c384df41.png)
+
+5. We need to have maven installed for the next step.
+6. We go to the Maven tab on the right and, first, click on "clean" (we will observe that the content of the "target" directory is deleted and recreated) and then we will click on "install" to generate our .jar inside this same folder.
+
+![image](https://user-images.githubusercontent.com/98974760/214926765-ff4afd37-e3f1-498f-afb4-8b9594a65e25.png)
+
+7. The next step is to create a Dockerfile, with which we can generate our image for Docker, by clicking on the green symbol that will appear at the beginning and then on "Build Image on Docker".
+
+![image](https://user-images.githubusercontent.com/98974760/214927325-ee2695fb-6d32-4c22-bdd1-44dd1ed7d9a7.png)
+
+8. Once finished, we can now push to Docker Hub.
+
+![image](https://user-images.githubusercontent.com/98974760/214927585-cd9db6c0-cad9-4c31-9b36-4cc761130e86.png)
+
+9. Then we will create the "docker-compose" file, where we will define the services, networks, volumes, etc. It is normally placed in the root directory.
+
+![image](https://user-images.githubusercontent.com/98974760/214928192-bc1b4f81-6ecd-4dbe-8ccc-da56997f476c.png)
+
+10. Once our docker-compose file is finished, we will have two ways to execute it:
+   - The first is from commands in the terminal locating us at the address where the docker-compose is located: `$ docker-compose up -d`
+   - The second from IntelliJ itself, by clicking on the green icon that appears in front of "services" of our "docker-compose" file.
+
+![image](https://user-images.githubusercontent.com/98974760/214929269-22e89f1d-73f2-4c15-ade0-05d36e5529f5.png)
+
+11. Once executed, we will have our microservice installed and working in Docker.
