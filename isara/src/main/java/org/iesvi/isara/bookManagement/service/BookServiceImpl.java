@@ -9,6 +9,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Service layer of the Book Entity that implements the BookService interface.
+ * This serves as an intermediary between the Book class and the BookController controller.
+ *
+ * @author Isa & Sara
+ */
 @Service
 public class BookServiceImpl implements BookService {
     @Autowired
