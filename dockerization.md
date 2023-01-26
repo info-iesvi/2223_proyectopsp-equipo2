@@ -36,6 +36,14 @@ As it is the first time we enter this database, after creating it, we see that i
 
 ### PHASE 2. DOCKERISE THE APPLICATION
 
+We have had to create a "Dockerfile", which we have saved in the src/main/docker directory, specifying the necessary configurations for the creation of our image for Docker Hub. We will also use a specific maven plugin (spotify/docker-maven-plugin), which we will include and configure in the "pom.xml" file.
+
+![image](https://user-images.githubusercontent.com/98974760/214931223-ddd3211f-d0d7-467b-9996-e86595f73ca5.png)
+
+In the "properties" section of the POM we define the prefix of the docker image to generate (docker.image.prefix). As can be seen, we have put the account name of one of us in Docker Hub (igr1985), since we will upload the generated image to that repository.
+
+![image](https://user-images.githubusercontent.com/98974760/214932122-566c5e38-a5e2-49f7-9728-32e17e28bf10.png)
+
 Whenever we want to generate a new version of our image, we will need to change the version
 in the POM file, where we will see something like ``<version>0.2.0</version>``, and in
 the Dockerfile where we must change the JAR filename in something like ``ADD isara-0.2.0.jar app.jar``.
