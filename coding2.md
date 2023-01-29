@@ -53,10 +53,20 @@ The Book entity is linked to the Author entity, the latter being an attribute of
 
 #### CREATING A NEW BOOK
 
+![image](https://user-images.githubusercontent.com/98974760/215351085-a184e3aa-92b7-45cb-bd74-a0d6343dab51.png)
+
 #### LIST ALL BOOKS
+
+![image](https://user-images.githubusercontent.com/98974760/215351590-1a762da5-c9c3-46f9-bef0-530b7f612446.png)
 
 #### LIST ONE BOOK
 
+![image](https://user-images.githubusercontent.com/98974760/215351622-9ac3aaec-e71f-4150-a914-57969beb0fe3.png)
+
 #### EDIT A BOOK
 
+![image](https://user-images.githubusercontent.com/98974760/215351773-ca717aa0-1627-4037-9ebb-a4e77847b2c8.png)
+
 #### DELETE A BOOK
+
+![image](https://user-images.githubusercontent.com/98974760/215351825-2b065302-6d81-46d5-8b60-c41320c6dca2.png)
