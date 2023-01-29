@@ -38,15 +38,19 @@ As it is the first time we enter this database, after creating it, we see that i
 
 We have had to create a "Dockerfile", which we have saved in the src/main/docker directory, specifying the necessary configurations for the creation of our image for Docker Hub. We will also use a specific maven plugin (spotify/docker-maven-plugin), which we will include and configure in the "pom.xml" file.
 
+We have to select New file (in the top left-hand corner), and put what it says in the image below:
+
+![image](https://user-images.githubusercontent.com/58866375/215343670-1c0f8ee7-c6f8-4e67-ab28-37625a72e21c.png)
+
+(The configuration in the pom file):
+
 ![image](https://user-images.githubusercontent.com/98974760/214931223-ddd3211f-d0d7-467b-9996-e86595f73ca5.png)
 
-In the "properties" section of the POM we define the prefix of the docker image to generate (docker.image.prefix). As can be seen, we have put the account name of one of us in Docker Hub (igr1985), since we will upload the generated image to that repository.
+In the "properties" section of the POM we define the prefix of the docker image to generate (docker.image.prefix). As can be seen, we have put the account name of one of us in Docker Hub (we use the Isa's account: igr1985), since we will upload the generated image to that repository.
 
 ![image](https://user-images.githubusercontent.com/98974760/214932122-566c5e38-a5e2-49f7-9728-32e17e28bf10.png)
 
-Whenever we want to generate a new version of our image, we will need to change the version
-in the POM file, where we will see something like ``<version>0.2.0</version>``, and in
-the Dockerfile where we must change the JAR filename in something like ``ADD isara-0.2.0.jar app.jar``.
+Whenever we want to generate a new version of our image, we will need to change the version in the POM file, where we will see something like ``<version>0.2.0</version>``. If we want to do that in the Dockerfile, we have to create the JAR, where we must change JAR filename in something like ``ADD isara-0.2.0.jar app.jar``.
 
 Versioning should be done in the following way:
 - Major versions (A.y.z): Planned upgrades that happen only when very big changes happen, like API signatures changing or different behaviours for established services.
@@ -69,8 +73,13 @@ Once we get a successful build, we can instantiate our application in Docker, wi
 
 ### PHASE 3. DEFINITION AND IMPLEMENTATION OF A MULTI-CONTAINER APP
 
-Config values stored in ``.env`` file. Different environments with different values can
-be used. One could have a ``docker-compose.pre.yml`` and a ``.env.pre``.
+Config values stored in ``.env`` file. Different environments with different values can be used. One could have a ``docker-compose.pre.yml`` and a ``.env.pre``.
+
+A Docker Compose is a tool for defining and running multi-container Docker applications. A YAML file is used to configure the application's services. Then, with a single command, all the services in the configuration are created and started.
+
+In our docker-compose, we have defined it as follows: 
+
+![image](https://user-images.githubusercontent.com/58866375/215344221-a3a40b29-3d07-4e13-be77-fa423ba79530.png)
 
 To start the container in the same terminal (container stops when closing the terminal):
 ``docker-compose up``
@@ -78,7 +87,6 @@ To start the container in the same terminal (container stops when closing the te
 To start on its own process: ``docker-compose up -d``
 
 ![image](https://user-images.githubusercontent.com/98974760/213020638-8a02a797-1d05-4cfc-ae23-3ea30fad31e5.png)
-
 
 To force the containers to be recreated even if they exist:
 ``docker-compose up -d --force-recreate``
@@ -94,7 +102,7 @@ for example, mysql, used in several projects. USE CAREFULLY.
 
 ### PHASE 4. UPLOAD THE CONTAINER TO DOCKER HUB
 
-Once the multicontainer is generated in Docker with the database and the application, the next step is to upload the image to Docker Hub.
+First of all, we have to create a repository in the Dockerhub account. Once the multicontainer is generated in Docker with the database and the application, the next step is to upload the image to Docker Hub.
 
 To do this, we first log in to the Docker Hub page with the ``$ docker login`` command. Once you have entered the credentials that it will ask you for, if you were not logged in yet, write the command ``$ docker push <user>/<image_name>:<version>`` and that's it. We check our Docker Hub account to see if it was created successfully.
 
