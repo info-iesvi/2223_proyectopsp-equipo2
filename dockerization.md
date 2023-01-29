@@ -146,6 +146,9 @@ If we click on the repository, we can access it and read or edit its description
 ![image](https://user-images.githubusercontent.com/98974760/214928192-bc1b4f81-6ecd-4dbe-8ccc-da56997f476c.png)
 
 10. Once our docker-compose file is finished, we will have two ways to execute it:
+
+![image](https://user-images.githubusercontent.com/58866375/215345193-07416b9c-2477-4cf5-acc7-efe9b2e47c64.png)
+
    - The first is from commands in the terminal locating us at the address where the docker-compose is located: `$ docker-compose up -d`
    - The second from IntelliJ itself, by clicking on the green icon that appears in front of "services" of our "docker-compose" file.
 
