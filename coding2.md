@@ -50,3 +50,13 @@ To test that all the Service layer methods work, we have used Postman with the f
 ### BOOK
 
 The Book entity is linked to the Author entity, the latter being an attribute of the former. Therefore, the 'author' attribute is the foreign key of the book.
+
+#### CREATING A NEW BOOK
+
+#### LIST ALL BOOKS
+
+#### LIST ONE BOOK
+
+#### EDIT A BOOK
+
+#### DELETE A BOOK
