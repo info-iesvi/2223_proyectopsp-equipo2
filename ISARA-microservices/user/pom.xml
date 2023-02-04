@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.iesvi</groupId>
-    <artifactId>isara</artifactId>
+    <artifactId>isara_user</artifactId>
     <version>0.1.0</version>
-    <name>user</name>
+    <name>isara_user</name>
     <description>user</description>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

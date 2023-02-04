@@ -12,7 +12,7 @@ services:
       depends_on:
         database
       links:
-        database:proyecto-mysql
+        database
 
   book:
     image: 'igr1985/isara_book'
@@ -26,7 +26,7 @@ services:
       depends_on:
         database
       links:
-        database:proyecto-mysql
+        database
 
   author:
     image: 'igr1985/isara_author'
@@ -40,7 +40,7 @@ services:
       depends_on:
         database
       links:
-        database:proyecto-mysql
+        database
 
   database:
     image: mysql:latest

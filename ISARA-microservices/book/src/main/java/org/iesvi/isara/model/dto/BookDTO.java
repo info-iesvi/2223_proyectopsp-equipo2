@@ -2,6 +2,7 @@ package org.iesvi.isara.model.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.iesvi.isara.model.Author;
 
 @Getter
 @Setter
