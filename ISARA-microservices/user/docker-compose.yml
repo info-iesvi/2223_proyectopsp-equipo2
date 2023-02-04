@@ -1,0 +1,58 @@
+version: '3'
+services:
+  user:
+    image: 'igr1985/isara_user'
+    container_name: isara_user
+    environment:
+      spring.datasource.url: ${MYSQL_DATASOURCE_URL}
+      spring.datasource.username: ${MYSQL_USER}
+      spring.datasource.password: ${MYSQL_PASSWORD}
+      ports:
+        "8083:8083"
+      depends_on:
+        database
+      links:
+        database:proyecto-mysql
+
+  book:
+    image: 'igr1985/isara_book'
+    container_name: isara_book
+    environment:
+      spring.datasource.url: ${MYSQL_DATASOURCE_URL}
+      spring.datasource.username: ${MYSQL_USER}
+      spring.datasource.password: ${MYSQL_PASSWORD}
+      ports:
+        "8083:8083"
+      depends_on:
+        database
+      links:
+        database:proyecto-mysql
+
+  author:
+    image: 'igr1985/isara_author'
+    container_name: isara_author
+    environment:
+      spring.datasource.url: ${MYSQL_DATASOURCE_URL}
+      spring.datasource.username: ${MYSQL_USER}
+      spring.datasource.password: ${MYSQL_PASSWORD}
+      ports:
+        "8083:8083"
+      depends_on:
+        database
+      links:
+        database:proyecto-mysql
+
+  database:
+    image: mysql:latest
+    container_name: proyecto-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      ports:
+        "3306:3306"
+      volumes:
+        proyecto-mysql_data:/var/lib/mysql
+volumes:
+  proyecto-mysql_data:
