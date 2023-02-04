@@ -44,7 +44,7 @@ services:
 
   database:
     image: mysql:latest
-    container_name: proyecto-mysql
+    container_name: isara_microservice_mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_USER: ${MYSQL_USER}
@@ -53,6 +53,6 @@ services:
       ports:
         "3306:3306"
       volumes:
-        proyecto-mysql_data:/var/lib/mysql
+        isara_microservice_mysql_data:/var/lib/mysql
 volumes:
-  proyecto-mysql_data:
+  isara_microservice_mysql_data:
