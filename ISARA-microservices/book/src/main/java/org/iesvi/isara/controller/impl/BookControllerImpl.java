@@ -1,6 +1,7 @@
-package org.iesvi.isara.controller;
+package org.iesvi.isara.controller.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.iesvi.isara.controller.BookController;
 import org.iesvi.isara.model.Book;
 import org.iesvi.isara.model.dto.BookDTO;
 import org.iesvi.isara.service.impl.BookServiceImpl;
