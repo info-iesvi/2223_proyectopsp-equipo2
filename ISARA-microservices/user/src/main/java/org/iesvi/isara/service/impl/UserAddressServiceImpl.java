@@ -22,44 +22,21 @@ public class UserAddressServiceImpl implements UserAddressService {
     @Autowired
     private UserAddressRepository userAddressRepository;
 
-    /**
-     * Method to list the user address of the repository.
-     *
-     * @return A list of address.
-     */
     @Override
     public List<UserAddressDTO> getAllUserAddress() {
         return UserAddressDTOConverter.convertListToDto(userAddressRepository.findAll());
     }
 
-    /**
-     * Method to display the data of a user address by id.
-     *
-     * @param id Identification of user address.
-     * @return The data of the address.
-     */
     @Override
     public UserAddressDTO getUserAddressById(Long id) {
         return UserAddressDTOConverter.convertToDto(userAddressRepository.findById(id));
     }
 
-    /**
-     * Method to save the data of the user address in the repository.
-     * This method will be used both to create a new user address and to edit an exiting one.
-     *
-     * @param address The user address' data.
-     * @return The data of the address saved.
-     */
     @Override
     public UserAddressDTO saveUserAddress(UserAddress address) {
         return UserAddressDTOConverter.convertToDto(userAddressRepository.save(address));
     }
 
-    /**
-     * Method to delete a user address by id.
-     *
-     * @param id Identification of user address to delete.
-     */
     @Override
     public void deleteUserAddress(Long id) {
         userAddressRepository.deleteById(id);
