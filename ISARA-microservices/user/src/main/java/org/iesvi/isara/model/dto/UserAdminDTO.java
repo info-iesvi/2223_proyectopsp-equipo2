@@ -12,6 +12,7 @@ import org.iesvi.isara.model.UserAddress;
 @Getter
 @Setter
 public class UserAdminDTO {
+    private Long idUser;
     private String userName;
     private String password;
     private String firstName;
