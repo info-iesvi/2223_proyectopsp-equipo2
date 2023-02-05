@@ -20,7 +20,7 @@ public interface UserAddressController {
      *
      * @return HTTP code 200 OK if successful.
      */
-    @GetMapping("/addresses")
+    @GetMapping("/address")
     ResponseEntity<?> getAllUserAddress();
 
     /**
@@ -29,7 +29,7 @@ public interface UserAddressController {
      * @param id User address identifier.
      * @return HTTP code 200 OK if successful.
      */
-    @GetMapping("/address")
+    @GetMapping("/address/{id}")
     ResponseEntity<?> getUserAddressById(@PathVariable Long id);
 
     /**
