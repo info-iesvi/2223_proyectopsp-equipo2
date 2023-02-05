@@ -1,4 +1,4 @@
-## List all Address
+## List all address
 ![listAllAddress](https://user-images.githubusercontent.com/58866375/216816683-632840b8-fea0-4592-8f8b-373f64697220.PNG)
 
 ## Create a new user
