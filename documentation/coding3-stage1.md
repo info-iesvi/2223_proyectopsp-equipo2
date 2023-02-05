@@ -21,6 +21,8 @@ If you click on the following links, you will see the application properties fil
 As we can see, the server port is the same in the three microservices, however, if we look at the docker-compose file, we can see that each of them listens on a different port.
 
 ## Testing
+Finally, we will see the tests carried out in Postman from Docker. We can see that, depending of the service, the port changes.
+
 ### List all address
 ![listAllAddress](https://user-images.githubusercontent.com/58866375/216816683-632840b8-fea0-4592-8f8b-373f64697220.PNG)
 
