@@ -12,3 +12,4 @@ In the following links you can read the complete documentation with all the step
 - [[ISSUE 6] CODING 2](https://github.com/info-iesvi/2223_proyectopsp-equipo2/blob/main/documentation/coding2.md)
 - [[ISSUE 7] CODING 3 - STAGE 1](https://github.com/info-iesvi/2223_proyectopsp-equipo2/blob/main/documentation/coding3-stage1.md)
 - [DOCKERIZATION](https://github.com/info-iesvi/2223_proyectopsp-equipo2/blob/main/documentation/dockerization.md)
+- [DOCKERIZATION 2](https://github.com/info-iesvi/2223_proyectopsp-equipo2/blob/main/documentation/dockerization2.md)
