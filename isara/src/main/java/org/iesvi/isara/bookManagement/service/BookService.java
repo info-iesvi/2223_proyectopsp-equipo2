@@ -2,26 +2,25 @@ package org.iesvi.isara.bookManagement.service;
 
 import org.iesvi.isara.bookManagement.domain.Book;
 import org.iesvi.isara.bookManagement.infra.dto.BookDTO;
-import org.iesvi.isara.bookManagement.infra.dto.converter.BookDTOConverter;
-import org.iesvi.isara.bookManagement.persistence.BookRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Service layer of the Book Entity.
+ * This serves as an intermediary between the Book class and the BookController controller.
+ *
+ * @author Isa & Sara
+ */
 @Service
-public class BookService {
-    @Autowired
-    private BookRepository bookRepository;
+public interface BookService {
 
     /**
      * Method to list the books of the repository.
      *
      * @return A list of books.
      */
-    public List<BookDTO> getAllBooks() {
-        return BookDTOConverter.convertListToDto(bookRepository.findAll());
-    }
+    List<BookDTO> getAllBooks();
 
     /**
      * Method to display the data of a book by id.
@@ -29,9 +28,7 @@ public class BookService {
      * @param id Identification of book.
      * @return The data of the book.
      */
-    public BookDTO getBookById(Long id) {
-        return BookDTOConverter.convertToDto(bookRepository.findById(id));
-    }
+    BookDTO getBookById(Long id);
 
     /**
      * Method to save the data of the book in the repository.
@@ -40,16 +37,12 @@ public class BookService {
      * @param book The book's data.
      * @return The data of the book saved.
      */
-    public BookDTO saveBook(Book book) {
-        return BookDTOConverter.convertToDto(bookRepository.save(book));
-    }
+    BookDTO saveBook(Book book);
 
     /**
      * Method to delete a book by id.
      *
      * @param id Identification of book to delete.
      */
-    public void deleteBook(Long id) {
-        bookRepository.deleteById(id);
-    }
+    void deleteBook(Long id);
 }

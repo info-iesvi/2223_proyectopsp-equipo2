@@ -1,0 +1,55 @@
+version: '3'
+services:
+  user:
+    image: 'igr1985/isara_user'
+    container_name: isara_user
+    environment:
+      spring.datasource.url: ${MYSQL_DATASOURCE_URL}
+      spring.datasource.username: ${MYSQL_USER}
+      spring.datasource.password: ${MYSQL_PASSWORD}
+    ports:
+      - "8091:8083"
+    depends_on:
+      - database
+    links:
+      - database
+  book:
+    image: 'igr1985/isara_book'
+    container_name: isara_book
+    environment:
+      spring.datasource.url: ${MYSQL_DATASOURCE_URL}
+      spring.datasource.username: ${MYSQL_USER}
+      spring.datasource.password: ${MYSQL_PASSWORD}
+    ports:
+      - "8092:8083"
+    depends_on:
+      - database
+    links:
+      - database
+  author:
+    image: 'igr1985/isara_author'
+    container_name: isara_author
+    environment:
+      spring.datasource.url: ${MYSQL_DATASOURCE_URL}
+      spring.datasource.username: ${MYSQL_USER}
+      spring.datasource.password: ${MYSQL_PASSWORD}
+    ports:
+      - "8093:8083"
+    depends_on:
+      - database
+    links:
+      - database
+  database:
+    image: mysql:latest
+    container_name: isara_microservice_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    ports:
+      - "3306:3306"
+    volumes:
+      - isara_microservice_mysql_data:/var/lib/mysql
+volumes:
+  isara_microservice_mysql_data:
