@@ -1,6 +1,7 @@
 package org.iesvi.isara.service;
 
 import org.iesvi.isara.model.User;
+import org.iesvi.isara.model.UserEmail;
 import org.iesvi.isara.model.dto.UserDTO;
 import org.springframework.stereotype.Service;
 
@@ -49,8 +50,7 @@ public interface UserService {
     /**
      * Method to email to the server Gmail account.
      *
-     * @param subject Mail header.
-     * @param message Message body.
+     * @param email
      */
-    void sendEmail(String subject, String message);
+    void sendEmail(UserEmail email);
 }

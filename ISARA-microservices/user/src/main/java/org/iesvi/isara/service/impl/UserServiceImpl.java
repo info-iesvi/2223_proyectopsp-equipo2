@@ -4,6 +4,7 @@ import org.apache.commons.net.smtp.AuthenticatingSMTPClient;
 import org.apache.commons.net.smtp.SMTPReply;
 import org.apache.commons.net.smtp.SimpleSMTPHeader;
 import org.iesvi.isara.model.User;
+import org.iesvi.isara.model.UserEmail;
 import org.iesvi.isara.model.dto.UserDTO;
 import org.iesvi.isara.model.dto.converter.UserDTOConverter;
 import org.iesvi.isara.repository.UserRepository;
@@ -49,11 +50,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void sendEmail(String subject, String message) {
+    public void sendEmail(UserEmail email) {
         AuthenticatingSMTPClient client = new AuthenticatingSMTPClient();
 
         String server = "smtp.gmail.com";
-        String username = "isara";
+        String username = "isarabookstore@gmail.com";
         String password = "isara2023";
         int port = 587;
         String sender = "isarabookstore@gmail.com";
@@ -84,14 +85,17 @@ public class UserServiceImpl implements UserService {
 
                 if (client.auth(AuthenticatingSMTPClient.AUTH_METHOD.PLAIN, username, password)) {
                     System.out.println("4 - " + client.getReplyString());
-                    String receiver = "isabelmaria.gonzalezrodriguez@iesvalleinclan.es";
+                    String receiver1 = "isabelmaria.gonzalezrodriguez@iesvalleinclan.es";
 
-                    SimpleSMTPHeader header = new SimpleSMTPHeader(sender, receiver, subject);
+                    SimpleSMTPHeader header = new SimpleSMTPHeader(sender, receiver1, email.getSubject());
 
                     client.setSender(sender);
-                    client.addRecipient(receiver);
+                    client.addRecipient(receiver1);
 
-                    String receiverWithCopy = "sara.palmarodriguez@iesvalleinclan.es";
+                    String receiver2 = "sara.palmarodriguez@iesvalleinclan.es";
+                    client.addRecipient(receiver2);
+
+                    String receiverWithCopy = "jlrod2pruebas@gmail.com";
                     client.addRecipient(receiverWithCopy);
 
                     System.out.println("5 - " + client.getReplyString());
@@ -101,7 +105,7 @@ public class UserServiceImpl implements UserService {
                         System.out.println("ERROR: FAILED TO SEND DATA");
                     }else{
                         writer.write(header.toString());
-                        writer.write(message);
+                        writer.write(email.getMessage());
                         writer.close();
                         System.out.println("6 - " + client.getReplyString());
 

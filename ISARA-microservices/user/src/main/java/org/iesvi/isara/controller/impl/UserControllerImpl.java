@@ -3,6 +3,7 @@ package org.iesvi.isara.controller.impl;
 import lombok.RequiredArgsConstructor;
 import org.iesvi.isara.controller.UserController;
 import org.iesvi.isara.model.User;
+import org.iesvi.isara.model.UserEmail;
 import org.iesvi.isara.model.dto.UserDTO;
 import org.iesvi.isara.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,5 +51,11 @@ public class UserControllerImpl implements UserController {
     public ResponseEntity<?> deleteUserById(Long id) {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @Override
+    public ResponseEntity<?> sendEmail(UserEmail email) {
+        userService.sendEmail(email);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

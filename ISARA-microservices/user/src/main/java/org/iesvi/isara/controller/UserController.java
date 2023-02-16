@@ -1,6 +1,7 @@
 package org.iesvi.isara.controller;
 
 import org.iesvi.isara.model.User;
+import org.iesvi.isara.model.UserEmail;
 import org.iesvi.isara.model.dto.UserDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -30,7 +31,7 @@ public interface UserController {
      * @return HTTP code 200 OK if successful.
      */
     @GetMapping("/user/{id}")
-    ResponseEntity<?> getUserById(Long id);
+    ResponseEntity<?> getUserById(@PathVariable Long id);
 
     /**
      * POST method to add a new user to the repository.
@@ -59,4 +60,13 @@ public interface UserController {
      */
     @DeleteMapping("/user/{id}")
     ResponseEntity<?> deleteUserById(@PathVariable Long id);
+
+    /**
+     * POST method to email to the server Gmail account.
+     *
+     * @param email Email header & message body.
+     * @return HTTP code 200 OK if it was sent successfully.
+     */
+    @PostMapping("/email")
+    ResponseEntity<?> sendEmail(@RequestBody UserEmail email);
 }
