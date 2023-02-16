@@ -1,4 +1,5 @@
-# Issue 7
+# [ISSUE 7] CODING 3 - STAGE 1
+
 In a monolithic architecture, all entities are within the same project. In our case, we use an MVC (Model-View-Controller) structure; the folder structure separates the classes of the model (domain) from those of the controller (controller), the DTO (dto) and those related to the repository (persistence) or the services (service).
 This structure is replicated with each of the entities that form part of the API developed (book, author, user), as well as in another folder (share) where those classes that are not specific to an entity are included.
 
