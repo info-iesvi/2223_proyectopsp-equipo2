@@ -23,3 +23,7 @@ A Writer object is created to send the content of the message, equivalent to the
 In order to test the newly created service, we have also had to implement a new method in the corresponding controller.
 
 Then we have uploaded the image to Docker Hub again and run the command `$ docker-compose up -d`. Once the container is running in Docker, we have gone to Postman and tested the new service.
+
+![image](https://user-images.githubusercontent.com/98974760/219482952-c78937be-a845-45d9-a429-7130a161d66c.png)
+
+According to Postman, the shipment has been successful, but when checking the mail inbox, no new message appears.
