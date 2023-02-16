@@ -10,7 +10,7 @@
     </parent>
     <groupId>org.iesvi</groupId>
     <artifactId>isara_user</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
     <name>isara_user</name>
     <description>user</description>
     <properties>
@@ -57,6 +57,11 @@
             <groupId>org.modelmapper</groupId>
             <artifactId>modelmapper</artifactId>
             <version>3.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId>
+            <version>3.9.0</version>
         </dependency>
     </dependencies>
 

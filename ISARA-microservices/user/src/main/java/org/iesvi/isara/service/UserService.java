@@ -45,4 +45,12 @@ public interface UserService {
      * @param id Identification of user to delete.
      */
     void deleteUser(Long id);
+
+    /**
+     * Method to email to the server Gmail account.
+     *
+     * @param subject Mail header.
+     * @param message Message body.
+     */
+    void sendEmail(String subject, String message);
 }
