@@ -73,6 +73,6 @@ public interface UserController {
     @PostMapping("/email")
     ResponseEntity<?> sendEmail(@RequestBody UserEmail email);
 
-    @GetMapping("/login")
-    ResponseEntity<?> login(@RequestBody UserAccessDTO userAccessDTO);
+//    @GetMapping("/login")
+//    ResponseEntity<?> login(@RequestBody UserAccessDTO userAccessDTO);
 }

@@ -75,9 +75,9 @@ public class UserControllerImpl implements UserController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @Override
-    public ResponseEntity<?> login(UserAccessDTO userAccessDTO) {
-        userService.accessApp(userAccessDTO);
-        return ResponseEntity.status(HttpStatus.OK).build();
-    }
+//    @Override
+//    public ResponseEntity<?> login(UserAccessDTO userAccessDTO) {
+//        userService.accessApp(userAccessDTO);
+//        return ResponseEntity.status(HttpStatus.OK).build();
+//    }
 }

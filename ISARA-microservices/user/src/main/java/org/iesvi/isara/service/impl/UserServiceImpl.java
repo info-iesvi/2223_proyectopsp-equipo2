@@ -5,26 +5,16 @@ import org.apache.commons.net.smtp.SMTPReply;
 import org.apache.commons.net.smtp.SimpleSMTPHeader;
 import org.iesvi.isara.model.User;
 import org.iesvi.isara.model.UserEmail;
-import org.iesvi.isara.model.dto.UserAccessDTO;
 import org.iesvi.isara.model.dto.UserDTO;
 import org.iesvi.isara.model.dto.converter.UserDTOConverter;
 import org.iesvi.isara.repository.UserRepository;
 import org.iesvi.isara.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import util.Keyboard;
 
 import javax.net.ssl.KeyManager;
 import javax.net.ssl.KeyManagerFactory;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.Writer;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
 import java.util.List;
 
 /**
@@ -148,41 +138,4 @@ public class UserServiceImpl implements UserService {
 
         System.out.println("END OF SENDING");
     }
-
-    @Override
-    public void accessApp(UserAccessDTO userAccessDTO) {
-        List<User> userList = userRepository.findAll();
-
-        try {
-            for (User user : userList) {
-                if (user.getUserName().equalsIgnoreCase(userAccessDTO.getUserName())) {
-                    URL url = getClass().getClassLoader().getResource("key.txt");
-                    if (url != null) {
-                        File keyFile = new File(url.toURI());
-                        FileReader fileReader = new FileReader(keyFile);
-                        BufferedReader bufferedReader = new BufferedReader(fileReader);
-                        String key = bufferedReader.readLine();
-
-                        MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-
-                        byte[] bytesPassword = userAccessDTO.getPassword().getBytes();
-                        messageDigest.update(bytesPassword);
-                        byte[] resumePassword = messageDigest.digest(key.getBytes());
-                        String loginPassword = new String(resumePassword);
-
-                        if (loginPassword.equalsIgnoreCase(user.getPassword())) {
-                            System.out.println("Welcome user " + user.getUserName());
-                        }else{
-                            System.out.println("Incorrect password");
-                        }
-                    } else {
-                        throw new IllegalArgumentException("File not found");
-                    }
-                }
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
 }

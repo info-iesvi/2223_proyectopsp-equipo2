@@ -54,6 +54,4 @@ public interface UserService {
      * @param email
      */
     void sendEmail(UserEmail email);
-
-    void accessApp(UserAccessDTO userAccessDTO);
 }
