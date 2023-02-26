@@ -4,8 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.iesvi.isara.controller.UserController;
 import org.iesvi.isara.model.User;
 import org.iesvi.isara.model.UserEmail;
-import org.iesvi.isara.model.dto.UserAccessDTO;
-import org.iesvi.isara.model.dto.UserDTO;
 import org.iesvi.isara.service.AuthService;
 import org.iesvi.isara.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,13 +37,13 @@ public class UserControllerImpl implements UserController {
         // If not, it sends back an error message
         if (authService.validateCredentials(authHeader)) {
             response = ResponseEntity.ok(userService.getAllUsers());
-            OperationsLog.log(authService.getUser(authHeader), "List all users", "GET", false);
+            OperationsLog.generateLogFile(authService.getUser(authHeader), "List all users", "GET", false);
         } else {
             String errorBody = "{" +
                     "\"message\": \"Invalid credentials\"" +
                     "}";
             response = ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorBody);
-            OperationsLog.log(authService.getUser(authHeader), "List all users", "GET", true);
+            OperationsLog.generateLogFile(authService.getUser(authHeader), "List all users", "GET", true);
         }
 
         return response;
@@ -67,13 +65,13 @@ public class UserControllerImpl implements UserController {
         // If not, it sends back an error message
         if (authService.validateCredentials(authHeader)) {
             response = ResponseEntity.status(HttpStatus.CREATED).body(userService.saveUser(newUser));
-            OperationsLog.log(authService.getUser(authHeader), "Add new user", "POST", false);
+            OperationsLog.generateLogFile(authService.getUser(authHeader), "Add new user", "POST", false);
         } else {
             String errorBody = "{" +
                     "\"message\": \"Invalid credentials\"" +
                     "}";
             response = ResponseEntity.status(HttpStatus.FORBIDDEN).body(errorBody);
-            OperationsLog.log(authService.getUser(authHeader), "Add new user", "POST", true);
+            OperationsLog.generateLogFile(authService.getUser(authHeader), "Add new user", "POST", true);
         }
         return response;
     }
@@ -95,10 +93,4 @@ public class UserControllerImpl implements UserController {
         userService.sendEmail(email);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
-
-//    @Override
-//    public ResponseEntity<?> login(UserAccessDTO userAccessDTO) {
-//        userService.accessApp(userAccessDTO);
-//        return ResponseEntity.status(HttpStatus.OK).build();
-//    }
 }

@@ -16,7 +16,7 @@ public class OperationsLog {
      * @param isError   True if it's an error, False if it's not
      * @author Isa & Sara
      */
-    public static void log(String opUser, String resource, String operation, boolean isError) {
+    public static void generateLogFile(String opUser, String resource, String operation, boolean isError) {
         try {
             // Query the file exists, otherwise create one with the name access.log
             if (!new File("resources/access.log").exists()) {
