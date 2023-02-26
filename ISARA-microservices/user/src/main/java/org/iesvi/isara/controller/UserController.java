@@ -2,7 +2,9 @@ package org.iesvi.isara.controller;
 
 import org.iesvi.isara.model.User;
 import org.iesvi.isara.model.UserEmail;
+import org.iesvi.isara.model.dto.UserAccessDTO;
 import org.iesvi.isara.model.dto.UserDTO;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -36,11 +38,12 @@ public interface UserController {
     /**
      * POST method to add a new user to the repository.
      *
+     * @param authHeader Data of the user running this operation
      * @param newUser Data of the new user.
      * @return HTTP code 201 Created if successful.
      */
     @PostMapping("/user")
-    ResponseEntity<UserDTO> addNewUser(@RequestBody User newUser);
+    ResponseEntity<?> addNewUser(@RequestHeader("Authorization") String authHeader, @RequestBody User newUser);
 
     /**
      * PUT method to modify the data of an existing user in the repository.
@@ -69,4 +72,7 @@ public interface UserController {
      */
     @PostMapping("/email")
     ResponseEntity<?> sendEmail(@RequestBody UserEmail email);
+
+    @GetMapping("/login")
+    ResponseEntity<?> login(@RequestBody UserAccessDTO userAccessDTO);
 }

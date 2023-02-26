@@ -2,6 +2,7 @@ package org.iesvi.isara.service;
 
 import org.iesvi.isara.model.User;
 import org.iesvi.isara.model.UserEmail;
+import org.iesvi.isara.model.dto.UserAccessDTO;
 import org.iesvi.isara.model.dto.UserDTO;
 import org.springframework.stereotype.Service;
 
@@ -53,4 +54,6 @@ public interface UserService {
      * @param email
      */
     void sendEmail(UserEmail email);
+
+    void accessApp(UserAccessDTO userAccessDTO);
 }

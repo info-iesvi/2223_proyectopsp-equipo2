@@ -4,13 +4,16 @@ import lombok.RequiredArgsConstructor;
 import org.iesvi.isara.controller.UserController;
 import org.iesvi.isara.model.User;
 import org.iesvi.isara.model.UserEmail;
+import org.iesvi.isara.model.dto.UserAccessDTO;
 import org.iesvi.isara.model.dto.UserDTO;
+import org.iesvi.isara.service.AuthService;
 import org.iesvi.isara.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import util.OperationsLog;
 
 /**
  * Controller layer of the User Entity.
@@ -25,6 +28,8 @@ public class UserControllerImpl implements UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private AuthService authService;
 
     @Override
     public ResponseEntity<?> getAllUsers() {
@@ -37,8 +42,19 @@ public class UserControllerImpl implements UserController {
     }
 
     @Override
-    public ResponseEntity<UserDTO> addNewUser(User newUser) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.saveUser(newUser));
+    public ResponseEntity<?> addNewUser(String authHeader, User newUser) {
+        ResponseEntity<?> response;
+        if (authService.validateCredentials(authHeader)) {
+            response = ResponseEntity.status(HttpStatus.CREATED).body(userService.saveUser(newUser));
+            OperationsLog.log(authService.getUser(authHeader), "User", "ADD", false);
+        } else {
+            String errorBody = "{" +
+                    "\"message\": \"Invalid credentials\"" +
+                    "}";
+            response = ResponseEntity.status(HttpStatus.FORBIDDEN).body(errorBody);
+            OperationsLog.log(authService.getUser(authHeader), "User", "ADD", true);
+        }
+        return response;
     }
 
     @Override
@@ -56,6 +72,12 @@ public class UserControllerImpl implements UserController {
     @Override
     public ResponseEntity<?> sendEmail(UserEmail email) {
         userService.sendEmail(email);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @Override
+    public ResponseEntity<?> login(UserAccessDTO userAccessDTO) {
+        userService.accessApp(userAccessDTO);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
