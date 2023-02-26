@@ -44,6 +44,12 @@ public class UserControllerImpl implements UserController {
     @Override
     public ResponseEntity<?> addNewUser(String authHeader, User newUser) {
         ResponseEntity<?> response;
+
+        // The password is saved by applying a digest thanks to the method 'encodePassword'
+        newUser.setPassword(authService.encodePassword(newUser.getPassword()));
+
+        // If the credentials are valid, the new user is added
+        // If not, it sends back an error message
         if (authService.validateCredentials(authHeader)) {
             response = ResponseEntity.status(HttpStatus.CREATED).body(userService.saveUser(newUser));
             OperationsLog.log(authService.getUser(authHeader), "User", "ADD", false);
