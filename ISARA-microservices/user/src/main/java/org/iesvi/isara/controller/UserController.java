@@ -21,10 +21,11 @@ public interface UserController {
     /**
      * GET method to obtain a list with all the users in the repository.
      *
-     * @return HTTP code 200 OK if successful.
+     * @param authHeader Data of the user running this operation
+     * @return HTTP code 200 OK if successful - HTTP code 404 Not Found if it's not.
      */
     @GetMapping("/user")
-    ResponseEntity<?> getAllUsers();
+    ResponseEntity<?> getAllUsers(@RequestHeader("Authorization") String authHeader);
 
     /**
      * GET method to obtain the data of a user registered in the repository by id.

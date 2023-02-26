@@ -32,8 +32,23 @@ public class UserControllerImpl implements UserController {
     private AuthService authService;
 
     @Override
-    public ResponseEntity<?> getAllUsers() {
-        return ResponseEntity.ok(userService.getAllUsers());
+    public ResponseEntity<?> getAllUsers(String authHeader) {
+        ResponseEntity<?> response;
+
+        // If the credentials are valid, the new user is added
+        // If not, it sends back an error message
+        if (authService.validateCredentials(authHeader)) {
+            response = ResponseEntity.ok(userService.getAllUsers());
+            OperationsLog.log(authService.getUser(authHeader), "List all users", "GET", false);
+        } else {
+            String errorBody = "{" +
+                    "\"message\": \"Invalid credentials\"" +
+                    "}";
+            response = ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorBody);
+            OperationsLog.log(authService.getUser(authHeader), "List all users", "GET", true);
+        }
+
+        return response;
     }
 
     @Override
@@ -52,13 +67,13 @@ public class UserControllerImpl implements UserController {
         // If not, it sends back an error message
         if (authService.validateCredentials(authHeader)) {
             response = ResponseEntity.status(HttpStatus.CREATED).body(userService.saveUser(newUser));
-            OperationsLog.log(authService.getUser(authHeader), "User", "ADD", false);
+            OperationsLog.log(authService.getUser(authHeader), "Add new user", "POST", false);
         } else {
             String errorBody = "{" +
                     "\"message\": \"Invalid credentials\"" +
                     "}";
             response = ResponseEntity.status(HttpStatus.FORBIDDEN).body(errorBody);
-            OperationsLog.log(authService.getUser(authHeader), "User", "ADD", true);
+            OperationsLog.log(authService.getUser(authHeader), "Add new user", "POST", true);
         }
         return response;
     }
