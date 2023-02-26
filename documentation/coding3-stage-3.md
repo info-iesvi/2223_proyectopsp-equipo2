@@ -4,6 +4,15 @@
 
 To implement the email service, we have created a sendEmail method inside the UserService interface (with its corresponding implementation in the UserService class). 
 
+UserService Interface:
+
+![image](https://user-images.githubusercontent.com/58866375/219486081-fcf0b079-6613-4efb-8f7d-4b93d5c568db.png)
+
+UserServiceImpl class:
+
+![image](https://user-images.githubusercontent.com/58866375/219486335-802394d1-0530-474d-a857-4daccf24eea3.png)
+
+
 In it we created a secure SMTP client and define the server to be used, in this case Gmail, along with its corresponding port; also the username and password from which the emails will be sent. 
 
 A key pair is then created to establish a secure communication channel. 
