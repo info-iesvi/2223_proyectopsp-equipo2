@@ -43,8 +43,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public String getUser(String authHeader) {
-        String userName = authHeader.split(", ")[0]; //TODO: hay que quitar mas zurrapa de la cadena
-        return userName;
+        return authHeader.split(", ")[0]; //TODO: hay que quitar mas zurrapa de la cadena
     }
 
     @Override
