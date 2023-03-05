@@ -23,7 +23,8 @@ public class OperationsLog {
      */
     public static void generateLogFile(String opUser, String resource, String operation, boolean isError) {
         Calendar actualDate = Calendar.getInstance(); // To be able to use the Calendar package
-        String newEntry = "USER: " + opUser
+        String newEntry = (isError ? "ERROR" : "DEBUG")
+                + " - USER: " + opUser
                 + " - DATE: " + String.format("%02d", actualDate.get(Calendar.DAY_OF_MONTH))
                 + "/" + String.format("%02d", (actualDate.get(Calendar.MONTH) + 1))
                 + "/" + actualDate.get(Calendar.YEAR)
