@@ -24,18 +24,14 @@ public class AuthServiceImpl implements AuthService {
         String userPassword = new String(base64Decoder.decode(authHeader.split(" ")[1])).split(":")[1];
         boolean result = false;
 
-        try {
-            for (User user : userList) {
-                if (user.getUserName().equalsIgnoreCase(userName)) {
-                    String encodedUserPassword = HexadecimalOperations.getHexStringFromBytes(encodePassword(userPassword).getBytes());
+        for (User user : userList) {
+            if (user.getUserName().equalsIgnoreCase(userName)) {
+                String encodedUserPassword = HexadecimalOperations.getHexStringFromBytes(encodePassword(userPassword).getBytes());
 
-                    if (encodedUserPassword.equalsIgnoreCase(user.getPassword())) {
-                        result = true;
-                    }
+                if (encodedUserPassword.equalsIgnoreCase(user.getPassword())) {
+                    result = true;
                 }
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
         }
 
         return result;
