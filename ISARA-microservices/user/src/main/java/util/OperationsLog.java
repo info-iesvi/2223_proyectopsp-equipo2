@@ -22,31 +22,19 @@ public class OperationsLog {
      * @author Isa & Sara
      */
     public static void generateLogFile(String opUser, String resource, String operation, boolean isError) {
-        try {
-            // Query the file exists, otherwise create one with the name access.log
-            if (!new File("resources/access.log").exists()) {
-                FileWriter file = new FileWriter("access.log", true);
-                Calendar actualDate = Calendar.getInstance(); // To be able to use the Calendar package
+        Calendar actualDate = Calendar.getInstance(); // To be able to use the Calendar package
+        String newEntry = "USER: " + opUser
+                + " - DATE: " + String.format("%02d", actualDate.get(Calendar.DAY_OF_MONTH))
+                + "/" + String.format("%02d", (actualDate.get(Calendar.MONTH) + 1))
+                + "/" + actualDate.get(Calendar.YEAR)
+                + " - TIME: " + String.format("%02d", actualDate.get(Calendar.HOUR_OF_DAY))
+                + ":" + String.format("%02d", actualDate.get(Calendar.MINUTE))
+                + ":" + String.format("%02d", actualDate.get(Calendar.SECOND))
+                + " - REQUESTED RESOURCE: " + resource
+                + " - OPERATION: " + operation
+                + "\r\n";
 
-                // Start writing to the file
-                file.write("USER: " + opUser
-                        + " - DATE: " + actualDate.get(Calendar.DAY_OF_MONTH)
-                        + "/" + (actualDate.get(Calendar.MONTH) + 1)
-                        + "/" + actualDate.get(Calendar.YEAR)
-                        + " - TIME: " + actualDate.get(Calendar.HOUR_OF_DAY)
-                        + ":" + actualDate.get(Calendar.MINUTE)
-                        + ":" + actualDate.get(Calendar.SECOND)
-                        + " - REQUESTED RESOURCE: " + resource
-                        + " - OPERATION: " + operation
-                        + "\r\n");
-
-                // Close de file
-                file.close();
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
+        writeTextFile("access.log", newEntry);
         generateSecretKey();
         encryptSymmetricFile();
         decryptSymmetricFile();
@@ -79,7 +67,7 @@ public class OperationsLog {
             Cipher c = Cipher.getInstance("AES/ECB/PKCS5Padding");
             c.init(Cipher.ENCRYPT_MODE, secretKey);
 
-            byte[] logFile = (byte[]) readFile("access.log");
+            byte[] logFile = readTextFile("access.log").getBytes();
 
             byte[] encryptedFile = c.doFinal(logFile);
             System.out.println("Encrypted: " + new String(encryptedFile));
@@ -122,7 +110,7 @@ public class OperationsLog {
             PublicKey publicKey = pair.getPublic();
 
             // Read the target file
-            byte[] logFile = (byte[]) readFile("access.log");
+            byte[] logFile = readTextFile("access.log").getBytes();
 
             // Sign the file with the private key
             // Give the data to the Signature object
@@ -171,6 +159,35 @@ public class OperationsLog {
         }
         catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private static String readTextFile(String fileName) throws IOException {
+        StringBuilder fileContents = new StringBuilder(); //use a stringbuilder to append contents
+        InputStreamReader in = new InputStreamReader(new FileInputStream(fileName));
+
+        while (in.ready()) { //read while buffer has contents
+            fileContents.append(in.read());
+        }
+
+        in.close();
+        return fileContents.toString();
+    }
+
+    private static void writeTextFile(String fileName, String content) {
+        try {
+            boolean fileExists = new File(fileName).exists();
+
+            // Query the file exists, otherwise create one
+            FileWriter file = new FileWriter(fileName, fileExists);
+
+            // Start writing to the file
+            file.write(content);
+
+            // Close the file
+            file.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
