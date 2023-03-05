@@ -4,9 +4,12 @@ import org.iesvi.isara.model.User;
 import org.iesvi.isara.repository.UserRepository;
 import org.iesvi.isara.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.security.MessageDigest;
 import java.util.List;
 
+@Service
 public class AuthServiceImpl implements AuthService {
     @Autowired
     private UserRepository userRepository;
@@ -14,9 +17,9 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public boolean validateCredentials(String authHeader) {
         List<User> userList = userRepository.findAll();
-        String userPassword = authHeader.split(", ")[5]; //TODO: hay que quitar mas zurrapa de la cadena
-        String userName = authHeader.split(", ")[0]; //TODO: hay que quitar mas zurrapa de la cadena
-        String algorithm = authHeader.split(", ")[4]; //SHA-256 by default
+        String userPassword = authHeader.split(", ")[5].split("\"")[1];
+        String userName = authHeader.split(", ")[0].split("\"")[1];
+        String algorithm = authHeader.split(", ")[4].split("\"")[1]; //SHA-256 by default
         boolean result = false;
 
         try {
@@ -43,7 +46,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public String getUser(String authHeader) {
-        return authHeader.split(", ")[0]; //TODO: hay que quitar mas zurrapa de la cadena
+        return authHeader.split(", ")[0].split("\"")[1];
     }
 
     @Override

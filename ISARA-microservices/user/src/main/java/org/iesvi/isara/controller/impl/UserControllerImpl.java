@@ -7,6 +7,7 @@ import org.iesvi.isara.model.User;
 import org.iesvi.isara.model.UserEmail;
 import org.iesvi.isara.service.AuthService;
 import org.iesvi.isara.service.UserService;
+import org.iesvi.isara.service.impl.AuthServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,15 +22,18 @@ import util.OperationsLog;
  * @author Isa & Sara
  */
 @Controller
-@AllArgsConstructor
 @RequiredArgsConstructor
 @RequestMapping("/isara")
 public class UserControllerImpl implements UserController {
 
-    //@Autowired
     private UserService userService;
-    //@Autowired
     private AuthService authService;
+
+    @Autowired
+    public UserControllerImpl(UserService userService, AuthService authService) {
+        this.userService = userService;
+        this.authService = authService;
+    }
 
     @Override
     public ResponseEntity<?> getAllUsers(String authHeader) {
