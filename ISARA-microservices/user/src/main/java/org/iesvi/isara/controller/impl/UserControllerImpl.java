@@ -48,7 +48,7 @@ public class UserControllerImpl implements UserController {
             String errorBody = "{" +
                     "\"message\": \"Invalid credentials\"" +
                     "}";
-            response = ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorBody);
+            response = ResponseEntity.status(HttpStatus.FORBIDDEN).body(errorBody);
             OperationsLog.generateLogFile(authService.getUser(authHeader), "List all users", "GET", true);
         }
 
