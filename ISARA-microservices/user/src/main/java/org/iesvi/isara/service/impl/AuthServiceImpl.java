@@ -5,6 +5,7 @@ import org.iesvi.isara.repository.UserRepository;
 import org.iesvi.isara.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import util.HexadecimalOperations;
 
 import java.security.MessageDigest;
 import java.util.List;
@@ -27,12 +28,11 @@ public class AuthServiceImpl implements AuthService {
                 if (user.getUserName().equalsIgnoreCase(userName)) {
                     MessageDigest messageDigest = MessageDigest.getInstance(algorithm);
 
-                    byte[] bytesPassword = userPassword.getBytes();
-                    messageDigest.update(bytesPassword);
-                    byte[] resumePassword = messageDigest.digest(userPassword.getBytes());
-                    String loginPassword = new String(resumePassword);
+                    byte[] bytesPassword = user.getPassword().getBytes();
+                    byte[] resumePassword = messageDigest.digest(bytesPassword);
+                    String loginPassword = HexadecimalOperations.getHexStringFromBytes(resumePassword);
 
-                    if (loginPassword.equalsIgnoreCase(user.getPassword())) {
+                    if (loginPassword.equalsIgnoreCase(userPassword)) {
                         result = true;
                     }
                 }
@@ -54,8 +54,6 @@ public class AuthServiceImpl implements AuthService {
         byte[] resumePassword = new byte[0];
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-            byte[] bytesPassword = password.getBytes();
-            messageDigest.update(bytesPassword);
             resumePassword = messageDigest.digest(password.getBytes());
         } catch (Exception ex) {
             ex.printStackTrace();
