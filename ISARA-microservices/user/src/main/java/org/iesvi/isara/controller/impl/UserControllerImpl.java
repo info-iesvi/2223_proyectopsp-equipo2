@@ -1,5 +1,6 @@
 package org.iesvi.isara.controller.impl;
 
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.iesvi.isara.controller.UserController;
 import org.iesvi.isara.model.User;
@@ -20,13 +21,14 @@ import util.OperationsLog;
  * @author Isa & Sara
  */
 @Controller
+@AllArgsConstructor
 @RequiredArgsConstructor
 @RequestMapping("/isara")
 public class UserControllerImpl implements UserController {
 
-    @Autowired
+    //@Autowired
     private UserService userService;
-    @Autowired
+    //@Autowired
     private AuthService authService;
 
     @Override
