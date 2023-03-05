@@ -2,9 +2,6 @@ package org.iesvi.isara.controller;
 
 import org.iesvi.isara.model.User;
 import org.iesvi.isara.model.UserEmail;
-import org.iesvi.isara.model.dto.UserAccessDTO;
-import org.iesvi.isara.model.dto.UserDTO;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -74,6 +71,4 @@ public interface UserController {
     @PostMapping("/email")
     ResponseEntity<?> sendEmail(@RequestBody UserEmail email);
 
-//    @GetMapping("/login")
-//    ResponseEntity<?> login(@RequestBody UserAccessDTO userAccessDTO);
 }
