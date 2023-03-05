@@ -123,9 +123,6 @@ public class OperationsLog {
             byte[] sign = dsa.sign();
 
             // Write the signed file in a binary file
-//            FileOutputStream outSign = new FileOutputStream("access.signature");
-//            outSign.write(sign);
-//            outSign.close();
             writeFile("access.signature", sign);
 
             // The message receiver verifies with the public key the signed contents
@@ -145,17 +142,11 @@ public class OperationsLog {
             PKCS8EncodedKeySpec pkcs8Spec = new PKCS8EncodedKeySpec(privateKey.getEncoded());
 
             // Write the private key in a binary file
-//            FileOutputStream outpriv = new FileOutputStream("key.private");
-//            outpriv.write(pkcs8Spec.getEncoded());
-//            outpriv.close();
             writeFile("key.private", pkcs8Spec.getEncoded());
 
             X509EncodedKeySpec pkX509 = new X509EncodedKeySpec(publicKey.getEncoded());
 
             // Write public key in a binary file
-//            FileOutputStream outpub = new FileOutputStream("key.public");
-//            outpub.write(pkX509.getEncoded());
-//            outpub.close();
             writeFile("key.public", pkX509.getEncoded());
         }
         catch (Exception e) {

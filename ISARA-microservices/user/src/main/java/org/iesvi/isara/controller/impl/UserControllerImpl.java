@@ -85,6 +85,7 @@ public class UserControllerImpl implements UserController {
     @Override
     public ResponseEntity<?> editUser(User editUser, Long id) {
         editUser.setIdUser(id);
+        editUser.setPassword(authService.encodePassword(editUser.getPassword()));
         return ResponseEntity.ok(userService.saveUser(editUser));
     }
 

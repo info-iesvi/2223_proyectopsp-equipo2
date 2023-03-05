@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import util.HexadecimalOperations;
 
 import java.security.MessageDigest;
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -18,21 +19,17 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public boolean validateCredentials(String authHeader) {
         List<User> userList = userRepository.findAll();
-        String userPassword = authHeader.split(", ")[5].split("\"")[1];
-        String userName = authHeader.split(", ")[0].split("\"")[1];
-        String algorithm = authHeader.split(", ")[4].split("\"")[1]; //SHA-256 by default
+        Base64.Decoder base64Decoder = Base64.getDecoder();
+        String userName = new String(base64Decoder.decode(authHeader.split(" ")[1])).split(":")[0];
+        String userPassword = new String(base64Decoder.decode(authHeader.split(" ")[1])).split(":")[1];
         boolean result = false;
 
         try {
             for (User user : userList) {
                 if (user.getUserName().equalsIgnoreCase(userName)) {
-                    MessageDigest messageDigest = MessageDigest.getInstance(algorithm);
+                    String encodedUserPassword = HexadecimalOperations.getHexStringFromBytes(encodePassword(userPassword).getBytes());
 
-                    byte[] bytesPassword = user.getPassword().getBytes();
-                    byte[] resumePassword = messageDigest.digest(bytesPassword);
-                    String loginPassword = HexadecimalOperations.getHexStringFromBytes(resumePassword);
-
-                    if (loginPassword.equalsIgnoreCase(userPassword)) {
+                    if (encodedUserPassword.equalsIgnoreCase(user.getPassword())) {
                         result = true;
                     }
                 }
@@ -46,7 +43,8 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public String getUser(String authHeader) {
-        return authHeader.split(", ")[0].split("\"")[1];
+        Base64.Decoder base64Decoder = Base64.getDecoder();
+        return new String(base64Decoder.decode(authHeader.split(" ")[1])).split(":")[0];
     }
 
     @Override
