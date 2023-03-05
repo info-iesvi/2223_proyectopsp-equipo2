@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import util.HexadecimalOperations;
 import util.OperationsLog;
 
 /**
@@ -65,7 +66,7 @@ public class UserControllerImpl implements UserController {
         ResponseEntity<?> response;
 
         // The password is saved by applying a digest thanks to the method 'encodePassword'
-        newUser.setPassword(authService.encodePassword(newUser.getPassword()));
+        newUser.setPassword(HexadecimalOperations.getHexStringFromBytes(authService.encodePassword(newUser.getPassword()).getBytes()));
 
         // If the credentials are valid, the new user is added
         // If not, it sends back an error message
@@ -85,7 +86,7 @@ public class UserControllerImpl implements UserController {
     @Override
     public ResponseEntity<?> editUser(User editUser, Long id) {
         editUser.setIdUser(id);
-        editUser.setPassword(authService.encodePassword(editUser.getPassword()));
+        editUser.setPassword(HexadecimalOperations.getHexStringFromBytes(authService.encodePassword(editUser.getPassword()).getBytes()));
         return ResponseEntity.ok(userService.saveUser(editUser));
     }
 
