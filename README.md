@@ -1,5 +1,5 @@
 # ISARA ONLINE BOOK STORE
-Trabajo realizado por Isabel María González Rodríguez & Sara Palma Rodríguez
+This project has been made by Isabel María González Rodríguez & Sara Palma Rodríguez
 
 ### 2223_proyectopsp_equipo2
 
