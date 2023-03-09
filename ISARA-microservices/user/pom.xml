@@ -10,7 +10,7 @@
     </parent>
     <groupId>org.iesvi</groupId>
     <artifactId>isara_user</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
     <name>isara_user</name>
     <description>user</description>
     <properties>

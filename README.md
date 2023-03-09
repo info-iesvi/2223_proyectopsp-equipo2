@@ -1,4 +1,5 @@
 # ISARA ONLINE BOOK STORE
+This project has been made by Isabel María González Rodríguez & Sara Palma Rodríguez
 
 ### 2223_proyectopsp_equipo2
 
@@ -13,6 +14,7 @@ In the following links you can read the complete documentation with all the step
 - [[ISSUE 6] CODING 2](https://github.com/info-iesvi/2223_proyectopsp-equipo2/blob/main/documentation/coding2.md)
 - [[ISSUE 7] CODING 3 - STAGE 1](https://github.com/info-iesvi/2223_proyectopsp-equipo2/blob/main/documentation/coding3-stage1.md)
 - [[ISSUE 8] CODING 3 - STAGE 3](https://github.com/info-iesvi/2223_proyectopsp-equipo2/blob/main/documentation/coding3-stage-3.md)
+- [[ISSUE 9] CODING 4 - SECURITY](https://github.com/info-iesvi/2223_proyectopsp-equipo2/blob/main/documentation/coding4.md)
 
 ### DOCKERIZING THE APPLICATION
 - [DOCKERIZATION](https://github.com/info-iesvi/2223_proyectopsp-equipo2/blob/main/documentation/dockerization.md)

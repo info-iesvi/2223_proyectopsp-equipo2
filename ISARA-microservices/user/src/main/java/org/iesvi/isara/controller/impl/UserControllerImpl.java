@@ -1,16 +1,19 @@
 package org.iesvi.isara.controller.impl;
 
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.iesvi.isara.controller.UserController;
 import org.iesvi.isara.model.User;
 import org.iesvi.isara.model.UserEmail;
 import org.iesvi.isara.service.AuthService;
 import org.iesvi.isara.service.UserService;
+import org.iesvi.isara.service.impl.AuthServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import util.HexadecimalOperations;
 import util.OperationsLog;
 
 /**
@@ -24,10 +27,14 @@ import util.OperationsLog;
 @RequestMapping("/isara")
 public class UserControllerImpl implements UserController {
 
-    @Autowired
     private UserService userService;
-    @Autowired
     private AuthService authService;
+
+    @Autowired
+    public UserControllerImpl(UserService userService, AuthService authService) {
+        this.userService = userService;
+        this.authService = authService;
+    }
 
     @Override
     public ResponseEntity<?> getAllUsers(String authHeader) {
@@ -42,7 +49,7 @@ public class UserControllerImpl implements UserController {
             String errorBody = "{" +
                     "\"message\": \"Invalid credentials\"" +
                     "}";
-            response = ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorBody);
+            response = ResponseEntity.status(HttpStatus.FORBIDDEN).body(errorBody);
             OperationsLog.generateLogFile(authService.getUser(authHeader), "List all users", "GET", true);
         }
 
@@ -59,7 +66,7 @@ public class UserControllerImpl implements UserController {
         ResponseEntity<?> response;
 
         // The password is saved by applying a digest thanks to the method 'encodePassword'
-        newUser.setPassword(authService.encodePassword(newUser.getPassword()));
+        newUser.setPassword(HexadecimalOperations.getHexStringFromBytes(authService.encodePassword(newUser.getPassword()).getBytes()));
 
         // If the credentials are valid, the new user is added
         // If not, it sends back an error message
@@ -79,6 +86,7 @@ public class UserControllerImpl implements UserController {
     @Override
     public ResponseEntity<?> editUser(User editUser, Long id) {
         editUser.setIdUser(id);
+        editUser.setPassword(HexadecimalOperations.getHexStringFromBytes(authService.encodePassword(editUser.getPassword()).getBytes()));
         return ResponseEntity.ok(userService.saveUser(editUser));
     }
 

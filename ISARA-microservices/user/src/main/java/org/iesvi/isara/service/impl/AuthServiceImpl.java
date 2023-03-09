@@ -4,9 +4,14 @@ import org.iesvi.isara.model.User;
 import org.iesvi.isara.repository.UserRepository;
 import org.iesvi.isara.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import util.HexadecimalOperations;
+
 import java.security.MessageDigest;
+import java.util.Base64;
 import java.util.List;
 
+@Service
 public class AuthServiceImpl implements AuthService {
     @Autowired
     private UserRepository userRepository;
@@ -14,28 +19,19 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public boolean validateCredentials(String authHeader) {
         List<User> userList = userRepository.findAll();
-        String userPassword = authHeader.split(", ")[5]; //TODO: hay que quitar mas zurrapa de la cadena
-        String userName = authHeader.split(", ")[0]; //TODO: hay que quitar mas zurrapa de la cadena
-        String algorithm = authHeader.split(", ")[4]; //SHA-256 by default
+        Base64.Decoder base64Decoder = Base64.getDecoder();
+        String userName = new String(base64Decoder.decode(authHeader.split(" ")[1])).split(":")[0];
+        String userPassword = new String(base64Decoder.decode(authHeader.split(" ")[1])).split(":")[1];
         boolean result = false;
 
-        try {
-            for (User user : userList) {
-                if (user.getUserName().equalsIgnoreCase(userName)) {
-                    MessageDigest messageDigest = MessageDigest.getInstance(algorithm);
+        for (User user : userList) {
+            if (user.getUserName().equalsIgnoreCase(userName)) {
+                String encodedUserPassword = HexadecimalOperations.getHexStringFromBytes(encodePassword(userPassword).getBytes());
 
-                    byte[] bytesPassword = userPassword.getBytes();
-                    messageDigest.update(bytesPassword);
-                    byte[] resumePassword = messageDigest.digest(userPassword.getBytes());
-                    String loginPassword = new String(resumePassword);
-
-                    if (loginPassword.equalsIgnoreCase(user.getPassword())) {
-                        result = true;
-                    }
+                if (encodedUserPassword.equalsIgnoreCase(user.getPassword())) {
+                    result = true;
                 }
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
         }
 
         return result;
@@ -43,7 +39,8 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public String getUser(String authHeader) {
-        return authHeader.split(", ")[0]; //TODO: hay que quitar mas zurrapa de la cadena
+        Base64.Decoder base64Decoder = Base64.getDecoder();
+        return new String(base64Decoder.decode(authHeader.split(" ")[1])).split(":")[0];
     }
 
     @Override
@@ -51,8 +48,6 @@ public class AuthServiceImpl implements AuthService {
         byte[] resumePassword = new byte[0];
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-            byte[] bytesPassword = password.getBytes();
-            messageDigest.update(bytesPassword);
             resumePassword = messageDigest.digest(password.getBytes());
         } catch (Exception ex) {
             ex.printStackTrace();
